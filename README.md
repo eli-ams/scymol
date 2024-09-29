@@ -73,6 +73,13 @@ is essential to adjust the execution commands in Tab 4 ("Run") within Scymol, en
 LAMMPS and/or MPI binaries are correctly specified. The final execution command in `Command to run` should match the
 format required to run a simulation on the user's system (e.g., `mpiexec -n 4 lmp input.dat`).
 
+In this GitHub distribution, the `lammps+mpi/` directory contains files with the binaries for a self-contained version
+of
+LAMMPS and OpenMPI. To use these, extract the contents of the file corresponding to your operating system into the
+`lammps+mpi/` folder. As of now, only Windows ([windows_lammps+mpi.tar.xz](lammps%2Bmpi%2Fwindows_lammps%2Bmpi.tar.xz))
+and Ubuntu ([unix_lammps+mpi.tar.xz](lammps%2Bmpi%2Funix_lammps%2Bmpi.tar.xz)) are included. Other binaries will be
+added later.
+
 ## Sample Simulation
 
 A simple simulation that utilizes all of Scymol's functionalities can be executed to ensure the program operates
