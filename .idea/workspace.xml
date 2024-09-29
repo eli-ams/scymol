@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e9d6c67-9f11-4394-be48-b5b766e058e5" name="Changes" comment="Changes to README.md.">
-      <change afterPath="$PROJECT_DIR$/output/2/log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.2_minimization.lammpstrj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt.lammpstrj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt_instantaneous.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression.lammpstrj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression_instantaneous.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/log.lammps" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/stage_1.in" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/structure.data" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/temp.mol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/program.log" beforeDir="false" afterPath="$PROJECT_DIR$/program.log" afterDir="false" />
+    <list default="true" id="5e9d6c67-9f11-4394-be48-b5b766e058e5" name="Changes" comment="Tested another simulation.">
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lammps+mpi/unix_lammps+mpi.tar.xz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lammps+mpi/windows_lammps+mpi.tar.xz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/scymol.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/scymol.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,13 +130,22 @@
       <option name="project" value="LOCAL" />
       <updated>1727624369956</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Tested another simulation.">
+      <option name="closed" value="true" />
+      <created>1727624610615</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727624610615</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Initial files upload; from CodeOcean capsule." />
     <MESSAGE value="Changes to README.md." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes to README.md." />
+    <MESSAGE value="Tested another simulation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tested another simulation." />
   </component>
 </project>
