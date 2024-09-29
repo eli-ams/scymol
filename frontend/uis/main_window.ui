@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>1. Molecule selection</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="top_layout">
+          <item>
+           <widget class="QPushButton" name="addMoleculeButton">
+            <property name="text">
+             <string>Add</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QTextEdit" name="moleculeInfo">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>2. Mixture setup</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QScrollArea" name="scrollArea_3">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>758</width>
+             <height>422</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item>
+             <widget class="QGroupBox" name="groupBox_4">
+              <property name="title">
+               <string>2.1 Setup</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_27">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_28"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_2">
+              <property name="title">
+               <string>2.2 Settings</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="4" column="0">
+                <widget class="QGroupBox" name="groupBox_27">
+                 <property name="title">
+                  <string>3.1.1 Layer offset</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_34">
+                  <item>
+                   <widget class="QDoubleSpinBox" name="doublespinbox_layer_offset">
+                    <property name="suffix">
+                     <string> Ang</string>
+                    </property>
+                    <property name="maximum">
+                     <double>99999.990000000005239</double>
+                    </property>
+                    <property name="value">
+                     <double>25.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QGroupBox" name="groupBox_26">
+                 <property name="title">
+                  <string>2.2.1 Initial density factor</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_33">
+                  <item>
+                   <widget class="QDoubleSpinBox" name="doublespinbox_initial_density_factor">
+                    <property name="decimals">
+                     <number>5</number>
+                    </property>
+                    <property name="minimum">
+                     <double>0.000000000000000</double>
+                    </property>
+                    <property name="singleStep">
+                     <double>0.005000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>0.010000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QGroupBox" name="groupBox_29">
+                 <property name="title">
+                  <string>2.2.1 Number of Mixtures needed</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_36">
+                  <item>
+                   <widget class="QSpinBox" name="spinbox_nbr_of_mixtures_needed">
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>9999999</number>
+                    </property>
+                    <property name="value">
+                     <number>1</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QGroupBox" name="groupBox_31">
+                 <property name="title">
+                  <string>2.2.1 Potential energy threshold</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_38">
+                  <item>
+                   <widget class="QDoubleSpinBox" name="doublespinbox_potential_energy_threshold">
+                    <property name="suffix">
+                     <string/>
+                    </property>
+                    <property name="minimum">
+                     <double>-99999.990000000005239</double>
+                    </property>
+                    <property name="maximum">
+                     <double>99999.990000000005239</double>
+                    </property>
+                    <property name="singleStep">
+                     <double>0.100000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>0.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QGroupBox" name="groupBox_32">
+                 <property name="title">
+                  <string>2.2.1 Distribution method</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_39">
+                  <item>
+                   <widget class="QComboBox" name="combobox_distribution_method">
+                    <item>
+                     <property name="text">
+                      <string>Sobol</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QGroupBox" name="groupBox_30">
+                 <property name="title">
+                  <string>2.2.1 Final density estimate (rough)</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_37">
+                  <item>
+                   <widget class="QDoubleSpinBox" name="doublespinbox_final_density">
+                    <property name="decimals">
+                     <number>2</number>
+                    </property>
+                    <property name="minimum">
+                     <double>0.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>99999999.000000000000000</double>
+                    </property>
+                    <property name="singleStep">
+                     <double>0.050000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>1000.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="title">
+           <string>Information</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QLabel" name="label_mixture_info">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>3. LAMMPS setup</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="groupBox_28">
+          <property name="title">
+           <string>3.1 Force field</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QGroupBox" name="groupBox">
+             <property name="title">
+              <string>3.1.1 Selection</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+               <widget class="QComboBox" name="combobox_force_field">
+                <item>
+                 <property name="text">
+                  <string>Gaff2</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gaff</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pcff</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Charmm</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tip3p</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_3">
+             <property name="title">
+              <string>3.1.2 Charges</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <item>
+               <widget class="QComboBox" name="combobox_charges">
+                <item>
+                 <property name="text">
+                  <string>gasteiger</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>default</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupbox_lammpsstages">
+          <property name="title">
+           <string>3.2 Stages</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>4. Run</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_23">
+        <item>
+         <widget class="QScrollArea" name="scrollArea_2">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_3">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>758</width>
+             <height>449</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_22">
+            <item>
+             <widget class="QGroupBox" name="groupBox_12">
+              <property name="title">
+               <string>4.1 LAMMPS</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_19">
+               <item>
+                <widget class="QLineEdit" name="lineedit_lammps_path">
+                 <property name="text">
+                  <string>../../../lammps+mpi/lmp_mpi</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_11">
+              <property name="title">
+               <string>4.2 Parallelization</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_17">
+               <item>
+                <widget class="QLineEdit" name="lineedit_mpiexec_path">
+                 <property name="text">
+                  <string>../../../lammps+mpi/mpiexec</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_13">
+              <property name="title">
+               <string>4.3 Number of prcoesses</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_21">
+               <item>
+                <widget class="QSpinBox" name="spinbox_number_of_processes">
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_6">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="title">
+               <string>4.4 Command to run</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_10">
+               <item>
+                <widget class="QLineEdit" name="lineedit_run_command"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="tab4_pushbutton_run">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Run</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>5. Postprocessing</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QSplitter" name="splitter">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <widget class="QTreeView" name="treeView"/>
+          <widget class="QTextEdit" name="textEdit"/>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMinimumSize</enum>
+          </property>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox_trajectory">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>99999999</number>
+            </property>
+            <property name="displayIntegerBase">
+             <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_trajectory">
+            <property name="text">
+             <string>Go</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuLoad">
+     <property name="title">
+      <string>Load...</string>
+     </property>
+     <widget class="QMenu" name="menuMixture">
+      <property name="title">
+       <string>Mixture</string>
+      </property>
+      <addaction name="actionfrom_pickle"/>
+      <addaction name="actionfrom_csv"/>
+     </widget>
+     <addaction name="menuMixture"/>
+     <addaction name="actionLoad_fromlammps"/>
+    </widget>
+    <widget class="QMenu" name="menuSave">
+     <property name="title">
+      <string>Save...</string>
+     </property>
+     <addaction name="actionSave_mixturedetails"/>
+    </widget>
+    <addaction name="separator"/>
+    <addaction name="menuLoad"/>
+    <addaction name="menuSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionExplore_root"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionDocumentation"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSave_mixture">
+   <property name="text">
+    <string>Save mixture...</string>
+   </property>
+  </action>
+  <action name="actionLoad_mixture">
+   <property name="text">
+    <string>Load mixture...</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionExplore_root">
+   <property name="text">
+    <string>Explore root</string>
+   </property>
+  </action>
+  <action name="actionLoad_fromlammps">
+   <property name="text">
+    <string>From LAMMPS</string>
+   </property>
+  </action>
+  <action name="actionSave_mixturedetails">
+   <property name="text">
+    <string>Save mixture</string>
+   </property>
+  </action>
+  <action name="actionfrom_pickle">
+   <property name="text">
+    <string>from pickle...</string>
+   </property>
+  </action>
+  <action name="actionfrom_csv">
+   <property name="text">
+    <string>from csv...</string>
+   </property>
+  </action>
+  <action name="actionDocumentation">
+   <property name="text">
+    <string>Documentation</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

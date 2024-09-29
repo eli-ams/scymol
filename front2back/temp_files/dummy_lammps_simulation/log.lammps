@@ -1,0 +1,224 @@
+LAMMPS (23 Jun 2022 - Update 4)
+#-------------------------------------------------------------------------------
+# LAMMPS Stage 1:
+# Created using Scymol 2023.
+#-------------------------------------------------------------------------------
+echo                both
+#-------------------------------------------------------------------------------
+# Substage 1.1: Initialization
+# Initialize LAMMPS run.
+#-------------------------------------------------------------------------------
+units               real
+boundary            p p p
+atom_style          full
+pair_style          lj/cut 12.0
+pair_modify         mix arithmetic
+bond_style          harmonic
+angle_style         harmonic
+dihedral_style      fourier
+improper_style      cvff
+special_bonds       amber
+read_data           structure.lmps
+Reading data file ...
+  orthogonal box = (0 0 0) to (6.432937 6.432937 64.329375)
+  1 by 1 by 2 MPI processor grid
+  reading atoms ...
+  50 atoms
+  reading velocities ...
+  50 velocities
+  scanning bonds ...
+  4 = max bonds/atom
+  scanning angles ...
+  6 = max angles/atom
+  reading bonds ...
+  40 bonds
+  reading angles ...
+  60 angles
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0.5     
+  special bond factors coul:  0        0        0.8333333333333334
+     4 = max # of 1-2 neighbors
+     3 = max # of 1-3 neighbors
+     3 = max # of 1-4 neighbors
+     4 = max # of special neighbors
+  special bonds CPU = 0.000 seconds
+  read_data CPU = 0.002 seconds
+
+#-------------------------------------------------------------------------------
+# Declaring variables:
+#-------------------------------------------------------------------------------
+variable            R equal 0.00198722
+variable            sysvol equal vol
+variable            sysmass equal mass(all)/6.0221367e+023
+variable            sysdensity equal v_sysmass/v_sysvol/1.0e-24
+variable            coulomb equal ecoul+elong
+variable            etotal equal etotal
+variable            pe equal pe
+variable            ke equal ke
+variable            evdwl equal evdwl
+variable            epair equal epair
+variable            ebond equal ebond
+variable            eangle equal eangle
+variable            edihed equal edihed
+variable            eimp equal eimp
+variable            lx equal lx
+variable            ly equal ly
+variable            lz equal lz
+variable            xhi equal xhi
+variable            yhi equal yhi
+variable            zhi equal zhi
+variable            xlo equal xlo
+variable            ylo equal ylo
+variable            zlo equal zlo
+variable            Nthermo equal 0
+variable            cella equal lx
+variable            cellb equal sqrt(ly*ly+xy*xy)
+variable            cellc equal sqrt(lz*lz+xz*xz+yz*yz)
+variable            cellalpha equal acos((xy*xz+ly*yz)/(v_cellb*v_cellc))
+variable            cellbeta equal acos(xz/v_cellc)
+variable            cellgamma equal acos(xy/v_cellb)
+variable            p equal press
+variable            pxx equal pxx
+variable            pyy equal pyy
+variable            pzz equal pzz
+variable            pyz equal pyz
+variable            pxz equal pxz
+variable            pxy equal pxy
+variable            sxx equal -pxx
+variable            syy equal -pyy
+variable            szz equal -pzz
+variable            syz equal -pyz
+variable            sxz equal -pxz
+variable            sxy equal -pxy
+variable            fmax equal fmax
+variable            fnorm equal fnorm
+variable            time equal step*dt+0.000001
+thermo_style        custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo_modify       flush yes
+reset_timestep      0
+#-------------------------------------------------------------------------------
+# Substage 1.2: Minimization
+# Initialize LAMMPS run.
+#-------------------------------------------------------------------------------
+min_style           cg
+min_modify          dmax 0.05
+thermo_style        custom step fmax fnorm press vol v_sysdensity v_sxx v_syy v_szz v_syz v_sxz v_sxy pe v_cella v_cellb v_cellc v_cellalpha v_cellbeta v_cellgamma
+WARNING: New thermo_style command, previous thermo_modify settings will be lost (../output.cpp:904)
+dump                minrun all custom 1000 1.2_minimization.lammpstrj id mol type q xs ys zs
+thermo              100
+minimize            0.0 0.0 1000 10000
+WARNING: Using 'neigh_modify every 1 delay 0 check yes' setting during minimization (../min.cpp:187)
+Generated 1 of 1 mixed pair_coeff terms from arithmetic mixing rule
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 14
+  ghost atom cutoff = 14
+  binsize = 7, bins = 1 1 10
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 10.7 | 10.7 | 10.7 Mbytes
+   Step          Fmax          Fnorm          Press          Volume      v_sysdensity      v_sxx          v_syy          v_szz          v_syz          v_sxz          v_sxy          PotEng        v_cella        v_cellb        v_cellc      v_cellalpha     v_cellbeta    v_cellgamma  
+         0   20.191668      42.560362      1656.7162      2662.1218      0.10006449    -1214.1047     -1991.6742     -1764.3696      709.30478      201.37523     -260.75391      1.0706953      6.432937       6.432937       64.329375      1.5707963      1.5707963      1.5707963    
+       100   2.1528607      5.7629364     -189.45235      2662.1218      0.10006449     145.7982       269.77581      152.78303      1.0137881     -17.900548     -19.813935     -5.2583036      6.432937       6.432937       64.329375      1.5707963      1.5707963      1.5707963    
+       200   0.14557446     0.55141961    -161.44415      2662.1218      0.10006449     197.04824      192.45529      94.828919      0.71165112     12.987817     -3.5585281     -6.7836738      6.432937       6.432937       64.329375      1.5707963      1.5707963      1.5707963    
+       300   0.076991397    0.27407941    -139.49485      2662.1218      0.10006449     188.64395      153.67489      76.165723      8.9784696      0.28810305    -40.859853     -8.0095361      6.432937       6.432937       64.329375      1.5707963      1.5707963      1.5707963    
+       400   1.1135498      2.1089299     -157.11085      2662.1218      0.10006449     217.54279      168.39962      85.390136     -12.958431      0.36670712    -29.760319     -8.6438691      6.432937       6.432937       64.329375      1.5707963      1.5707963      1.5707963    
+       500   0.96586934     2.8919724     -184.66785      2662.1218      0.10006449     223.6353       230.42076      99.94749       6.181232      -5.0448383     -21.981903     -9.1292847      6.432937       6.432937       64.329375      1.5707963      1.5707963      1.5707963    
+       600   0.058461668    0.20439918    -145.11222      2662.1218      0.10006449     234.93002      180.93108      19.475553      11.805702      1.2872767     -5.225288      -9.7827018      6.432937       6.432937       64.329375      1.5707963      1.5707963      1.5707963    
+       700   0.87369839     1.6395551     -136.06252      2662.1218      0.10006449     213.38097      181.61926      13.187346      9.3998111      6.2586254     -8.4571101     -10.056566      6.432937       6.432937       64.329375      1.5707963      1.5707963      1.5707963    
+       796   0.089272576    0.19435286    -151.31665      2662.1218      0.10006449     231.34907      207.47252      15.128348      5.5769713      5.0169878     -4.8185318     -10.243134      6.432937       6.432937       64.329375      1.5707963      1.5707963      1.5707963    
+Loop time of 0.114729 on 2 procs for 796 steps with 50 atoms
+
+96.1% CPU use with 2 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = linesearch alpha is zero
+  Energy initial, next-to-last, final = 
+      1.07069528959867  -10.2431335509162  -10.2431335509162
+  Force two-norm initial, final = 42.560362 0.19435286
+  Force max component initial, final = 20.191668 0.089272576
+  Final line search alpha, max atom move = 1.8704208e-07 1.6697729e-08
+  Iterations, force evaluations = 796 1589
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.068381   | 0.074356   | 0.080331   |   2.2 | 64.81
+Bond    | 0.0022456  | 0.0026887  | 0.0031319  |   0.9 |  2.34
+Neigh   | 0.00059864 | 0.00060489 | 0.00061114 |   0.0 |  0.53
+Comm    | 0.02569    | 0.030947   | 0.036204   |   3.0 | 26.97
+Output  | 0.00037934 | 0.0003875  | 0.00039566 |   0.0 |  0.34
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.005745   |            |       |  5.01
+
+Nlocal:             25 ave          30 max          20 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+Nghost:           1386 ave        1391 max        1381 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+Neighs:         4640.5 ave        5084 max        4197 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 9281
+Ave neighs/atom = 185.62
+Ave special neighs/atom = 4
+Neighbor list builds = 7
+Dangerous builds = 0
+undump              minrun
+#-------------------------------------------------------------------------------
+# Substage 1.3: Velocities
+# Initialize velocities to 298.15 (seed 1234) using a gaussian distribution.
+#-------------------------------------------------------------------------------
+velocity            all create 298.15 1234 dist gaussian mom yes rot no
+reset_timestep      0
+#-------------------------------------------------------------------------------
+# Substage 1.4: NVT-dynamics
+# Run 100 steps with a timestep of 1.0. T from 298.15 to 298.15.
+#-------------------------------------------------------------------------------
+thermo_style        custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+fix                 1 all nvt temp 298.15 298.15 100 drag 1 nreset 1000 mtk yes
+fix                 2 all ave/time 1 999 1000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_cella v_cellb v_cellc v_etotal v_pe v_ke v_evdwl v_coulomb v_sxx v_syy v_szz v_syz v_sxz v_sxy v_xhi v_yhi v_zhi v_xlo v_ylo v_zlo file 1.4_nvt_instantaneous.out
+dump                1 all custom 10 1.4_nvt.lammpstrj id mol type q xs ys zs
+timestep            1.0
+run                 100
+Generated 1 of 1 mixed pair_coeff terms from arithmetic mixing rule
+Per MPI rank memory allocation (min/avg/max) = 9.581 | 9.581 | 9.581 Mbytes
+   Step         v_time         Press          Volume      v_sysdensity       Temp          E_bond        E_angle        E_dihed        E_impro         E_vdwl         E_coul         E_tail         E_long         PotEng         KinEng    
+         0   1e-06          596.45694      2662.1218      0.10006449     298.15         0.00032640419  2.5474709      0              0             -12.790931      0              0              0             -10.243134      43.547697    
+       100   100           -427.54805      2662.1218      0.10006449     274.89355      2.3076563      6.7275574      0              0             -10.034562      0              0              0             -0.99934835     40.150868    
+Loop time of 0.0109606 on 2 procs for 100 steps with 50 atoms
+
+Performance: 788.278 ns/day, 0.030 hours/ns, 9123.589 timesteps/s
+100.0% CPU use with 2 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.0046499  | 0.0052409  | 0.0058319  |   0.8 | 47.82
+Bond    | 0.00018109 | 0.00020874 | 0.00023639 |   0.0 |  1.90
+Neigh   | 0.00017498 | 0.00017675 | 0.00017851 |   0.0 |  1.61
+Comm    | 0.0017719  | 0.0023119  | 0.0028518  |   1.1 | 21.09
+Output  | 0.00028057 | 0.0003048  | 0.00032903 |   0.0 |  2.78
+Modify  | 0.0024798  | 0.0025466  | 0.0026134  |   0.1 | 23.23
+Other   |            | 0.0001709  |            |       |  1.56
+
+Nlocal:             25 ave          30 max          20 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+Nghost:           1391 ave        1396 max        1386 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+Neighs:           4717 ave        5087 max        4347 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 9434
+Ave neighs/atom = 188.68
+Ave special neighs/atom = 4
+Neighbor list builds = 2
+Dangerous builds = 0
+unfix               1
+unfix               2
+undump              1
+Total wall time: 0:00:00

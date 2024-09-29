@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Library</string>
+    </property>
+    <addaction name="actionSimple_minimization"/>
+    <addaction name="actionUniaxial_compression"/>
+    <addaction name="actionHeat_cycle"/>
+    <addaction name="actionDensity_equilibration"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionUniaxial_compression">
+   <property name="text">
+    <string>Uniaxial compression</string>
+   </property>
+  </action>
+  <action name="actionHeat_cycle">
+   <property name="text">
+    <string>Heat cycle</string>
+   </property>
+  </action>
+  <action name="actionSimple_minimization">
+   <property name="text">
+    <string>Simple minimization</string>
+   </property>
+  </action>
+  <action name="actionDensity_equilibration">
+   <property name="text">
+    <string>Density equilibration</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

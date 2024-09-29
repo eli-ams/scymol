@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5e9d6c67-9f11-4394-be48-b5b766e058e5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/scymol.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Scymol.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend_static_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/inputs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_commands.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_presets_library/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_presets_library/initialization.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_presets_library/minimization.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_presets_library/npt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_presets_library/nve.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_presets_library/nvt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_presets_library/uniaxial_deformation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_presets_library/velocities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lammps_stages.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/log_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/mixture.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/molecule.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/pysimm_system.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/backend_connector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/backend_thread.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/data_extractor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/fron2back_static_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/running_process_dialog.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/1.2_minimization.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/1.4_nvt.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/1.4_nvt_instantaneous.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/log.lammps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/stage_1.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/structure.lmps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/temp_files/last.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/temp_files/last_trajectory.lmps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/temp_files/temp.lmps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front2back/validate_inputs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/context_menus/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/context_menus/load_molecules.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/custom_qtwidgets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/custom_qtwidgets/image_viewer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/custom_qtwidgets/list_of_lammps_substages.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/custom_qtwidgets/list_of_stages_widget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/custom_qtwidgets/mixture_table_widget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/custom_qtwidgets/molecule_list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/dialog_windows/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/dialog_windows/load_from_lammps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/dialog_windows/set_cell_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/dialog_windows/smiles_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/lammps_flowchart_window/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/initialize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/minimize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/npt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/nve.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/nvt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/uniaxial_deformation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/velocities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/lammps_flowchart_window/lammps_flowchart_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/custom_table_widget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/instantaneous_properties_file.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/lammps_syntax_highlighter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/menubar.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/tab1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/tab2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/tab3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/tab4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/tab5.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/main_window/trajectories_file_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/molecule.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/settingsfile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/lmpstage_initialize.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/lmpstage_minimize.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/lmpstage_npt.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/lmpstage_nve.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/lmpstage_nvt.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/lmpstage_uniaxialdeformation.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/lmpstage_velocities.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/load_from_lammps_dialog.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/main_window.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/merge.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/pop_window.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/process_dialog (copy).ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/process_dialog.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/setcell_window.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/uis/smiles_window.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logging_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/mixture_1/1.2_minimization.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/mixture_1/1.4_nvt.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/mixture_1/1.4_nvt_instantaneous.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/mixture_1/1.5_uniaxialcompression.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/mixture_1/1.5_uniaxialcompression_instantaneous.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/mixture_1/log.lammps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/mixture_1/stage_1.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/mixture_1/structure.data" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/1/mixture_1/temp.mol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prechecks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prechecks_codeocean.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/program.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture10.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture11.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/picture9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/video1.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/video2.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static_functions.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2mkJsFlZ2qhtlFet55OFn8JqqZ3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.main.executor": "Run",
+    "Python.prechecks.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Eli/Documents/pysimm-stable",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "settings.editor.splitter.proportion": "0.3095723"
+  }
+}]]></component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="scymol" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="prechecks" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="scymol" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/prechecks.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.prechecks" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-c69650fc56ca-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.15619.17" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5e9d6c67-9f11-4394-be48-b5b766e058e5" name="Changes" comment="" />
+      <created>1727614845350</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727614845350</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
