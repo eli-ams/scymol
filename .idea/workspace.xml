@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e9d6c67-9f11-4394-be48-b5b766e058e5" name="Changes" comment="Initial files upload; from CodeOcean capsule.">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scymol.md" beforeDir="false" />
+    <list default="true" id="5e9d6c67-9f11-4394-be48-b5b766e058e5" name="Changes" comment="Changes to README.md.">
+      <change afterPath="$PROJECT_DIR$/output/2/log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.2_minimization.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt_instantaneous.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression_instantaneous.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/log.lammps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/stage_1.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/structure.data" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/temp.mol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/program.log" beforeDir="false" afterPath="$PROJECT_DIR$/program.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -121,12 +128,21 @@
       <option name="project" value="LOCAL" />
       <updated>1727623559890</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changes to README.md.">
+      <option name="closed" value="true" />
+      <created>1727624369956</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727624369956</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Initial files upload; from CodeOcean capsule." />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial files upload; from CodeOcean capsule." />
+    <MESSAGE value="Changes to README.md." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to README.md." />
   </component>
 </project>

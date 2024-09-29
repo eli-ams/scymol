@@ -1,0 +1,138 @@
+2024-09-29_17:41:58 | Creating mixtures...
+2024-09-29_17:41:58 | Mixture 1 | Initializing atomic positions (Attempt 1)
+2024-09-29_17:42:00 | Generating LAMMPS script for stage: stage_1.
+2024-09-29_17:42:00 | LAMMPS stages:
+{
+    "stage": "stage_1",
+    "methods": [
+        {
+            "name": "add_simulation_title",
+            "params": {
+                "title": "",
+                "number": 1,
+                "description": "Created using Scymol 2023."
+            }
+        },
+        {
+            "name": "add_echo",
+            "params": {
+                "echo_style": "both"
+            }
+        },
+        {
+            "name": "standard_initialization_substage",
+            "params": {
+                "boundary_style": [
+                    "p",
+                    "p",
+                    "p"
+                ]
+            }
+        },
+        {
+            "name": "standard_minimization_substage",
+            "params": {}
+        },
+        {
+            "name": "standard_velocities_stage",
+            "params": {
+                "temp": 298.15,
+                "random_seed": 1234
+            }
+        },
+        {
+            "name": "standard_nvt_stage",
+            "params": {
+                "timestep": 1.0,
+                "set_timestep": 0,
+                "nrun": 5000,
+                "temp_initial": 298.15,
+                "temp_final": 298.15,
+                "temp_ncontrol": 100,
+                "nreset": 1000,
+                "drag": 1,
+                "nevery": 1,
+                "nrepeat": 999,
+                "nfreq": 1000,
+                "ndump": 1000
+            }
+        },
+        {
+            "name": "standard_uniaxial_deformation_stage",
+            "params": {
+                "timestep": 1.0,
+                "set_timestep": 0,
+                "nrun": 100000,
+                "comp_axis": "z",
+                "ndeformation": 1000,
+                "strain_style": "True strain",
+                "temp_initial": 298.15,
+                "temp_final": 298.15,
+                "temp_ncontrol": 100,
+                "nreset": 1000,
+                "drag": 1,
+                "nevery": 1,
+                "nrepeat": 999,
+                "nfreq": 1000,
+                "ndump": 1000
+            }
+        },
+        {
+            "name": "standard_npt_stage",
+            "params": {
+                "timestep": 1.0,
+                "set_timestep": 0,
+                "nrun": 5000,
+                "temp_initial": 298.15,
+                "temp_final": 298.15,
+                "temp_ncontrol": 100,
+                "nreset": 1000,
+                "drag": 1,
+                "pres_initial": 1.0,
+                "pres_final": 1.0,
+                "press_ncontrol": 100,
+                "nevery": 1,
+                "nrepeat": 999,
+                "nfreq": 1000,
+                "ndump": 1000,
+                "set_cubic": false,
+                "boxdims_changeto": "Last trajectory"
+            }
+        },
+        {
+            "name": "standard_nvt_stage",
+            "params": {
+                "timestep": 1.0,
+                "set_timestep": 0,
+                "nrun": 5000,
+                "temp_initial": 298.15,
+                "temp_final": 298.15,
+                "temp_ncontrol": 100,
+                "nreset": 1000,
+                "drag": 1,
+                "nevery": 1,
+                "nrepeat": 999,
+                "nfreq": 1000,
+                "ndump": 1000
+            }
+        },
+        {
+            "name": "standard_nve_stage",
+            "params": {
+                "timestep": 1.0,
+                "set_timestep": 0,
+                "nrun": 5000,
+                "nevery": 1,
+                "nrepeat": 999,
+                "nfreq": 1000,
+                "ndump": 1000
+            }
+        },
+        {
+            "name": "standard_minimization_substage",
+            "params": {}
+        }
+    ]
+}
+
+2024-09-29_17:42:00 | Mixture 1 | Running LAMMPS stage stage_1...
