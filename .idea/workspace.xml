@@ -4,12 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e9d6c67-9f11-4394-be48-b5b766e058e5" name="Changes" comment="Tested another simulation.">
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lammps+mpi/unix_lammps+mpi.tar.xz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lammps+mpi/windows_lammps+mpi.tar.xz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/scymol.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/scymol.iml" afterDir="false" />
+    <list default="true" id="5e9d6c67-9f11-4394-be48-b5b766e058e5" name="Changes" comment="Updated README.md.">
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.6_npt.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.6_npt_instantaneous.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.7_nvt.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.7_nvt_instantaneous.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.8_nve.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.8_nve_instantaneous.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.9_minimization.lammpstrj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/2/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.2_minimization.lammpstrj" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.2_minimization.lammpstrj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt.lammpstrj" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt.lammpstrj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt_instantaneous.out" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt_instantaneous.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression.lammpstrj" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression.lammpstrj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression_instantaneous.out" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression_instantaneous.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/log.lammps" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/log.lammps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/structure.data" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/structure.data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/temp.mol" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/temp.mol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/program.log" beforeDir="false" afterPath="$PROJECT_DIR$/program.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +151,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727624610615</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added LICENSE (GNU GENERAL PUBLIC LICENSE), and added precompiled binaries for LAMMPS and OpenMPI if users wish to run Scymol using a self-contained version of such, on Windows or Ubuntu.">
+      <option name="closed" value="true" />
+      <created>1727625254858</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1727625254858</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated README.md.">
+      <option name="closed" value="true" />
+      <created>1727625610586</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1727625610586</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -146,6 +175,8 @@
     <MESSAGE value="Initial files upload; from CodeOcean capsule." />
     <MESSAGE value="Changes to README.md." />
     <MESSAGE value="Tested another simulation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tested another simulation." />
+    <MESSAGE value="Added LICENSE (GNU GENERAL PUBLIC LICENSE), and added precompiled binaries for LAMMPS and OpenMPI if users wish to run Scymol using a self-contained version of such, on Windows or Ubuntu." />
+    <MESSAGE value="Updated README.md." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated README.md." />
   </component>
 </project>

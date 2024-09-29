@@ -1,7 +1,7 @@
-2024-09-29_15:22:59 | Creating mixtures...
-2024-09-29_15:23:00 | Mixture 1 | Initializing atomic positions (Attempt 1)
-2024-09-29_15:23:01 | Generating LAMMPS script for stage: stage_1.
-2024-09-29_15:23:01 | LAMMPS stages:
+2024-09-29_19:30:44 | Creating mixtures...
+2024-09-29_19:30:44 | Mixture 1 | Initializing atomic positions (Attempt 1)
+2024-09-29_19:30:46 | Generating LAMMPS script for stage: stage_1.
+2024-09-29_19:30:46 | LAMMPS stages:
 {
     "stage": "stage_1",
     "methods": [
@@ -135,4 +135,6 @@
     ]
 }
 
-2024-09-29_15:23:01 | Mixture 1 | Running LAMMPS stage stage_1...
+2024-09-29_19:30:46 | Mixture 1 | Running LAMMPS stage stage_1...
+2024-09-29_19:35:41 | LAMMPS run completed after  295.67 s.
+2024-09-29_19:35:41 | Program run terminated successfully after  297.47s.
