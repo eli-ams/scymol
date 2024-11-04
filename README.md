@@ -26,8 +26,8 @@ placing the contents of `src.tar` into the directory of the virtual environment.
 
 ### 1. Using setup.py
 
-1. Download Scymol's `setup.py` for [Windows](/data/install/windows/scymol_windows.rar) or for Unix-based
-   systems ([Ubuntu](/data/install/ubuntu/scymol_linux.tar.xz)).
+1. Download Scymol's `setup.py` for [Windows](https://github.com/eli-ams/scymol/blob/master/setup/scymol_windows.rar) or for Unix-based
+   systems [Ubuntu](https://github.com/eli-ams/scymol/blob/master/setup/scymol_windows.rar).
 2. Extract the contents into a directory, namely `/`.
 3. Run `python setup.py` to initiate the set up process. Make sure there is Internet connection. This script will create
    a `/scymol` directory, containing Scymol's source files, virtual environment, and all its dependencies. The script
