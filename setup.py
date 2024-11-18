@@ -9,10 +9,10 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/eli-ams/scymol",
-    license="MIT",
+    license="GNU General Public License v3 (GPLv3)",  # Specify the correct license here
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: GNU GENERAL PUBLIC LICENSE",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",  # Correct classifier
         "Operating System :: OS Independent",
     ],
     include_package_data=True,
