@@ -5,24 +5,225 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e9d6c67-9f11-4394-be48-b5b766e058e5" name="Changes" comment="Updated README.md.">
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.6_npt.lammpstrj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.6_npt_instantaneous.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.7_nvt.lammpstrj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.7_nvt_instantaneous.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.8_nve.lammpstrj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.8_nve_instantaneous.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/2/mixture_1/1.9_minimization.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/distributables/scymol_linux.tar.xz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/distributables/scymol_windows.rar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/env.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol.egg-info/PKG-INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol.egg-info/SOURCES.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol.egg-info/dependency_links.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol.egg-info/entry_points.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol.egg-info/requires.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol.egg-info/top_level.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/backend_static_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/inputs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_commands.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_presets_library/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_presets_library/initialization.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_presets_library/minimization.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_presets_library/npt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_presets_library/nve.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_presets_library/nvt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_presets_library/uniaxial_deformation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_presets_library/velocities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/lammps_stages.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/log_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/mixture.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/molecule.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/backend/pysimm_system.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/backend_connector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/backend_thread.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/data_extractor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/fron2back_static_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/running_process_dialog.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/temp_files/dummy_lammps_simulation/1.2_minimization.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/temp_files/dummy_lammps_simulation/1.4_nvt.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/temp_files/dummy_lammps_simulation/1.4_nvt_instantaneous.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/temp_files/dummy_lammps_simulation/log.lammps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/temp_files/dummy_lammps_simulation/stage_1.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/temp_files/dummy_lammps_simulation/structure.lmps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/temp_files/last.lammpstrj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/temp_files/last_trajectory.lmps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/temp_files/temp.lmps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/front2back/validate_inputs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/context_menus/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/context_menus/load_molecules.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/custom_qtwidgets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/custom_qtwidgets/image_viewer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/custom_qtwidgets/list_of_lammps_substages.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/custom_qtwidgets/list_of_stages_widget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/custom_qtwidgets/mixture_table_widget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/custom_qtwidgets/molecule_list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/dialog_windows/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/dialog_windows/load_from_lammps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/dialog_windows/set_cell_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/dialog_windows/smiles_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/lammps_flowchart_window/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/lammps_flowchart_window/dialog_windows/initialize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/lammps_flowchart_window/dialog_windows/minimize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/lammps_flowchart_window/dialog_windows/npt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/lammps_flowchart_window/dialog_windows/nve.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/lammps_flowchart_window/dialog_windows/nvt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/lammps_flowchart_window/dialog_windows/uniaxial_deformation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/lammps_flowchart_window/dialog_windows/velocities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/lammps_flowchart_window/lammps_flowchart_window.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/custom_table_widget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/instantaneous_properties_file.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/lammps_syntax_highlighter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/menubar.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/tab1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/tab2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/tab3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/tab4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/tab5.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/main_window/trajectories_file_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/molecule.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/settingsfile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/lmpstage_initialize.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/lmpstage_minimize.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/lmpstage_npt.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/lmpstage_nve.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/lmpstage_nvt.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/lmpstage_uniaxialdeformation.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/lmpstage_velocities.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/load_from_lammps_dialog.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/main_window.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/merge.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/pop_window.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/process_dialog (copy).ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/process_dialog.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/setcell_window.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/frontend/uis/smiles_window.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/logging_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/prechecks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/program.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scymol/static_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/scymol.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/scymol.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.2_minimization.lammpstrj" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.2_minimization.lammpstrj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt.lammpstrj" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt.lammpstrj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt_instantaneous.out" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.4_nvt_instantaneous.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression.lammpstrj" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression.lammpstrj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression_instantaneous.out" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/1.5_uniaxialcompression_instantaneous.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/log.lammps" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/log.lammps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/structure.data" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/structure.data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2/mixture_1/temp.mol" beforeDir="false" afterPath="$PROJECT_DIR$/output/2/mixture_1/temp.mol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/program.log" beforeDir="false" afterPath="$PROJECT_DIR$/program.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend_static_functions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/inputs.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_commands.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_functions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_presets_library/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_presets_library/initialization.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_presets_library/minimization.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_presets_library/npt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_presets_library/nve.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_presets_library/nvt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_presets_library/uniaxial_deformation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_presets_library/velocities.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lammps_stages.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/log_functions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mixture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/molecule.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pysimm_system.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/scymol/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/backend_connector.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/backend_thread.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/data_extractor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/fron2back_static_functions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/running_process_dialog.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/1.2_minimization.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/1.4_nvt.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/1.4_nvt_instantaneous.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/log.lammps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/stage_1.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/temp_files/dummy_lammps_simulation/structure.lmps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/temp_files/last.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/temp_files/last_trajectory.lmps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/temp_files/temp.lmps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front2back/validate_inputs.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/context_menus/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/context_menus/load_molecules.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/custom_qtwidgets/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/custom_qtwidgets/image_viewer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/custom_qtwidgets/list_of_lammps_substages.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/custom_qtwidgets/list_of_stages_widget.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/custom_qtwidgets/mixture_table_widget.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/custom_qtwidgets/molecule_list.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dialog_windows/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dialog_windows/load_from_lammps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dialog_windows/set_cell_window.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/dialog_windows/smiles_window.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lammps_flowchart_window/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/initialize.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/minimize.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/npt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/nve.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/nvt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/uniaxial_deformation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lammps_flowchart_window/dialog_windows/velocities.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lammps_flowchart_window/lammps_flowchart_window.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/custom_table_widget.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/instantaneous_properties_file.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/lammps_syntax_highlighter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/menubar.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/tab1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/tab2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/tab3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/tab4.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/tab5.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main_window/trajectories_file_class.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/molecule.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/settingsfile.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/lmpstage_initialize.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/lmpstage_minimize.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/lmpstage_npt.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/lmpstage_nve.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/lmpstage_nvt.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/lmpstage_uniaxialdeformation.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/lmpstage_velocities.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/load_from_lammps_dialog.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/main_window.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/merge.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/pop_window.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/process_dialog (copy).ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/process_dialog.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/setcell_window.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/uis/smiles_window.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lammps+mpi/unix_lammps+mpi.tar.xz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lammps+mpi/windows_lammps+mpi.tar.xz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logging_functions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.2_minimization.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.4_nvt.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.4_nvt_instantaneous.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.5_uniaxialcompression.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.5_uniaxialcompression_instantaneous.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.6_npt.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.6_npt_instantaneous.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.7_nvt.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.7_nvt_instantaneous.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.8_nve.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.8_nve_instantaneous.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/1.9_minimization.lammpstrj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/log.lammps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/stage_1.in" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/structure.data" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/1/mixture_1/temp.mol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prechecks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prechecks_codeocean.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/program.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup/scymol_linux.tar.xz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup/scymol_windows.rar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static_functions.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,15 +255,35 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Eli/Documents/pysimm-stable",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "last_opened_file_path": "/home/eli/PycharmProjects/scymol",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "settings.editor.splitter.proportion": "0.3095723"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.main (1)">
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="scymol" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scymol" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scymol/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="scymol" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -84,7 +305,6 @@
     </configuration>
     <configuration name="prechecks" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="scymol" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -104,8 +324,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="running_process_dialog" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="scymol" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scymol/front2back" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scymol/front2back/running_process_dialog.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.running_process_dialog" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.prechecks" />
       </list>

@@ -1,0 +1,7 @@
+{
+    "resolution_width": 960,
+    "resolution_height": 540,
+    "lammps_location": "lmp",
+    "mpi_location": "mpiexec",
+    "recent_files": []
+}
