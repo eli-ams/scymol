@@ -11,6 +11,17 @@ Classifier: License :: OSI Approved :: GNU GENERAL PUBLIC LICENSE
 Classifier: Operating System :: OS Independent
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: PyQt5
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: matplotlib
+Requires-Dist: psutil
+Requires-Dist: sobol_seq
+Requires-Dist: numba
+Requires-Dist: rdkit
+Requires-Dist: file_read_backwards
+Requires-Dist: sigfig
+Requires-Dist: pysimm@ git+https://github.com/polysimtools/pysimm.git
 
 # Scymol
 
@@ -40,8 +51,8 @@ placing the contents of `src.tar` into the directory of the virtual environment.
 
 ### 1. Using setup.py
 
-1. Download Scymol's `setup.py` for [Windows](https://github.com/eli-ams/scymol/blob/master/setup/scymol_windows.rar) or for Unix-based
-   systems [Ubuntu](https://github.com/eli-ams/scymol/blob/master/setup/scymol_linux.tar.xz).
+1. Download Scymol's `setup.py` for [Windows](https://github.com/eli-ams/scymol/blob/master/distributables/scymol_windows.rar) or for Unix-based
+   systems [Ubuntu](https://github.com/eli-ams/scymol/blob/master/distributables/scymol_linux.tar.xz).
 2. Extract the contents into a directory, namely `/`.
 3. Run `python setup.py` to initiate the set up process. Make sure there is Internet connection. This script will create
    a `/scymol` directory, containing Scymol's source files, virtual environment, and all its dependencies. The script

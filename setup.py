@@ -15,6 +15,7 @@ setup(
         "License :: OSI Approved :: GNU GENERAL PUBLIC LICENSE",
         "Operating System :: OS Independent",
     ],
+    include_package_data=True,
     packages=find_packages(),
     install_requires=[
         "PyQt5",
@@ -29,6 +30,16 @@ setup(
         "sigfig",
         "pysimm @ git+https://github.com/polysimtools/pysimm.git",  # Replace with actual URL and branch or commit
     ],
+    package_data={
+        "scymol": [
+            "frontend/uis/*",
+            "frontend/lammps_flowchart_window/dialog_windows/*",  # Include all files in the 'frontend/uis/' directory
+            "front2back/temp_files/*",
+            "front2back/temp_files/dummy_lammps_simulation/*",
+            "output/1/**/*",
+            "LICENSE",
+        ],
+    },
     entry_points={
         "console_scripts": [
             "scymol = scymol.main:main"  # Replace with the function you want to call
