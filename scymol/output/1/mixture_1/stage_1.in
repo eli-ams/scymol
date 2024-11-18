@@ -1,0 +1,186 @@
+#-------------------------------------------------------------------------------
+# LAMMPS Stage 1: 
+# Created using Scymol 2023.
+#-------------------------------------------------------------------------------
+echo                both
+#-------------------------------------------------------------------------------
+# Substage 1.1: Initialization
+# Initialize LAMMPS run.
+#-------------------------------------------------------------------------------
+units               real
+boundary            p p p
+atom_style          full
+pair_style          lj/cut 12.0
+pair_modify         mix arithmetic
+bond_style          harmonic
+angle_style         harmonic
+dihedral_style      fourier
+improper_style      cvff
+special_bonds       amber
+read_data           structure.data
+
+#-------------------------------------------------------------------------------
+# Declaring variables:
+#-------------------------------------------------------------------------------
+variable            R equal 0.00198722
+variable            sysvol equal vol
+variable            sysmass equal mass(all)/6.0221367e+023
+variable            sysdensity equal v_sysmass/v_sysvol/1.0e-24
+variable            coulomb equal ecoul+elong
+variable            etotal equal etotal
+variable            pe equal pe
+variable            ke equal ke
+variable            evdwl equal evdwl
+variable            epair equal epair
+variable            ebond equal ebond
+variable            eangle equal eangle
+variable            edihed equal edihed
+variable            eimp equal eimp
+variable            lx equal lx
+variable            ly equal ly
+variable            lz equal lz
+variable            xhi equal xhi
+variable            yhi equal yhi
+variable            zhi equal zhi
+variable            xlo equal xlo
+variable            ylo equal ylo
+variable            zlo equal zlo
+variable            Nthermo equal 0
+variable            cella equal lx
+variable            cellb equal sqrt(ly*ly+xy*xy)
+variable            cellc equal sqrt(lz*lz+xz*xz+yz*yz)
+variable            cellalpha equal acos((xy*xz+ly*yz)/(v_cellb*v_cellc))
+variable            cellbeta equal acos(xz/v_cellc)
+variable            cellgamma equal acos(xy/v_cellb)
+variable            p equal press
+variable            pxx equal pxx
+variable            pyy equal pyy
+variable            pzz equal pzz
+variable            pyz equal pyz
+variable            pxz equal pxz
+variable            pxy equal pxy
+variable            sxx equal -pxx
+variable            syy equal -pyy
+variable            szz equal -pzz
+variable            syz equal -pyz
+variable            sxz equal -pxz
+variable            sxy equal -pxy
+variable            fmax equal fmax
+variable            fnorm equal fnorm
+variable            time equal step*dt+0.000001
+thermo_style        custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo_modify       flush yes
+reset_timestep      0
+#-------------------------------------------------------------------------------
+# Substage 1.2: Minimization
+# Initialize LAMMPS run.
+#-------------------------------------------------------------------------------
+min_style           cg
+min_modify          dmax 0.05
+thermo_style        custom step fmax fnorm press vol v_sysdensity v_sxx v_syy v_szz v_syz v_sxz v_sxy pe v_cella v_cellb v_cellc v_cellalpha v_cellbeta v_cellgamma
+dump                minrun all custom 1000 1.2_minimization.lammpstrj id mol type q xs ys zs
+thermo              100
+minimize            0.0 0.0 1000 10000
+undump              minrun
+#-------------------------------------------------------------------------------
+# Substage 1.3: Velocities
+# Initialize velocities to 298.15 (seed 1234) using a gaussian distribution.
+#-------------------------------------------------------------------------------
+velocity            all create 298.15 1234 dist gaussian mom yes rot no
+reset_timestep      0
+#-------------------------------------------------------------------------------
+# Substage 1.4: NVT-dynamics
+# Run 5000 steps with a timestep of 1.0. T from 298.15 to 298.15.
+#-------------------------------------------------------------------------------
+thermo_style        custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+fix                 1 all nvt temp 298.15 298.15 100 drag 1 nreset 1000 mtk yes
+fix                 2 all ave/time 1 999 1000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_cella v_cellb v_cellc v_etotal v_pe v_ke v_evdwl v_coulomb v_sxx v_syy v_szz v_syz v_sxz v_sxy v_xhi v_yhi v_zhi v_xlo v_ylo v_zlo file 1.4_nvt_instantaneous.out
+dump                1 all custom 1000 1.4_nvt.lammpstrj id mol type q xs ys zs
+timestep            1.0
+run                 5000
+unfix               1
+unfix               2
+undump              1
+reset_timestep      0
+#-------------------------------------------------------------------------------
+# Substage 1.5: Uniaxial compression dynamics
+# Uniaxial compression in the z axis for 100000 steps with a timestep of 1.0.
+# Temperature control from 298.15 to 298.15 K. Deformation applied every 1000
+# steps, with an t strain equal to: XX)
+#-------------------------------------------------------------------------------
+variable            strainrate equal ln((lx+4.0)/lz)/100000.0
+variable            strainrateconst equal ${strainrate}
+thermo_style        custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+fix                 1 all nvt temp 298.15 298.15 100 drag 1 nreset 1000 mtk yes
+fix                 2 all ave/time 1 999 1000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_cella v_cellb v_cellc v_etotal v_pe v_ke v_evdwl v_coulomb v_sxx v_syy v_szz v_syz v_sxz v_sxy v_xhi v_yhi v_zhi v_xlo v_ylo v_zlo file 1.5_uniaxialcompression_instantaneous.out
+variable            wzhigh equal "v_zhi - 2.0"
+variable            wzlow equal "v_zlo + 2.0"
+fix                 upperW all indent 10 plane z v_wzhigh hi units box
+fix                 lowerW all indent 10 plane z v_wzlow lo units box
+fix                 dfrm all deform 1000 z trate ${strainrate} units box remap x
+dump                1 all custom 1000 1.5_uniaxialcompression.lammpstrj id mol type q xs ys zs
+timestep            1.0
+run                 100000
+unfix               1
+unfix               2
+unfix               upperW
+unfix               lowerW
+unfix               dfrm
+undump              1
+reset_timestep      0
+#-------------------------------------------------------------------------------
+# Substage 1.6: NPT-dynamics
+# Run 5000 steps with a timestep of 1.0. T from 298.15 to 298.15. Pressure
+# from 1.0 to 1.0.
+#-------------------------------------------------------------------------------
+thermo_style        custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+fix                 1 all npt temp 298.15 298.15 100 iso 1.0 1.0 100 drag 1 nreset 1000 mtk yes
+fix                 2 all ave/time 1 999 1000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_cella v_cellb v_cellc v_etotal v_pe v_ke v_evdwl v_coulomb v_sxx v_syy v_szz v_syz v_sxz v_sxy v_xhi v_yhi v_zhi v_xlo v_ylo v_zlo file 1.6_npt_instantaneous.out
+fix                 3 all ave/time 1 4999 5000 v_xlo v_xhi v_ylo v_yhi v_zlo v_zhi
+dump                1 all custom 1000 1.6_npt.lammpstrj id mol type q xs ys zs
+timestep            1.0
+run                 5000
+unfix               1
+unfix               2
+unfix               3
+undump              1
+reset_timestep      0
+#-------------------------------------------------------------------------------
+# Substage 1.7: NVT-dynamics
+# Run 5000 steps with a timestep of 1.0. T from 298.15 to 298.15.
+#-------------------------------------------------------------------------------
+thermo_style        custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+fix                 1 all nvt temp 298.15 298.15 100 drag 1 nreset 1000 mtk yes
+fix                 2 all ave/time 1 999 1000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_cella v_cellb v_cellc v_etotal v_pe v_ke v_evdwl v_coulomb v_sxx v_syy v_szz v_syz v_sxz v_sxy v_xhi v_yhi v_zhi v_xlo v_ylo v_zlo file 1.7_nvt_instantaneous.out
+dump                1 all custom 1000 1.7_nvt.lammpstrj id mol type q xs ys zs
+timestep            1.0
+run                 5000
+unfix               1
+unfix               2
+undump              1
+reset_timestep      0
+#-------------------------------------------------------------------------------
+# Substage 1.8: NVE-dynamics
+# Run 5000 steps with a timestep of 1.0.
+#-------------------------------------------------------------------------------
+thermo_style        custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+fix                 1 all nve nreset 1000 mtk yes
+fix                 2 all ave/time 1 999 1000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_cella v_cellb v_cellc v_etotal v_pe v_ke v_evdwl v_coulomb v_sxx v_syy v_szz v_syz v_sxz v_sxy v_xhi v_yhi v_zhi v_xlo v_ylo v_zlo file 1.8_nve_instantaneous.out
+dump                1 all custom 1000 1.8_nve.lammpstrj id mol type q xs ys zs
+timestep            1.0
+run                 5000
+unfix               1
+unfix               2
+undump              1
+reset_timestep      0
+#-------------------------------------------------------------------------------
+# Substage 1.9: Minimization
+# Initialize LAMMPS run.
+#-------------------------------------------------------------------------------
+min_style           cg
+min_modify          dmax 0.05
+thermo_style        custom step fmax fnorm press vol v_sysdensity v_sxx v_syy v_szz v_syz v_sxz v_sxy pe v_cella v_cellb v_cellc v_cellalpha v_cellbeta v_cellgamma
+dump                minrun all custom 1000 1.9_minimization.lammpstrj id mol type q xs ys zs
+thermo              100
+minimize            0.0 0.0 1000 10000
+undump              minrun
