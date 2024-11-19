@@ -27,7 +27,7 @@ placing the contents of https://github.com/eli-ams/scymol into the directory of 
 
 Scymol can be installed using 
 `conda install eli.ams::scymol` (https://anaconda.org/eli.ams/scymol). This approach is currently only compatible with
-Unix-based operating systems. Windows support will come soon.
+Unix-based operating systems. Windows support will arrive soon.
 
 ### 2. Installation Script (Linux/Windows)
 
