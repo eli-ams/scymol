@@ -19,17 +19,24 @@ outside the realm of Physics, Chemistry, or Numerical Computing.
 
 ## Installation
 
-Scymol can be installed using one of two methods: 1) Through the `setup.py` script, which generates a complete directory
-for Scymol, including its Python environment, dependencies, and precompiled LAMMPS/MPI binaries necessary for running
-simulations, or 2) By manually setting up a Python environment, installing all required libraries and dependencies, and
-placing the contents of `src.tar` into the directory of the virtual environment.
+Scymol can be installed using one of three methods: 1) Using Conda, 2) through the use of a custom installation
+script that can be downloaded below, or 3) By manually setting up a Python environment, installing all required libraries and dependencies, and
+placing the contents of https://github.com/eli-ams/scymol into the directory of the virtual environment.
 
-### 1. Using setup.py
+### 1. Using Conda (Linux)
 
-1. Download Scymol's `setup.py` for [Windows](https://github.com/eli-ams/scymol/blob/master/distributables/scymol_windows.rar) or for Unix-based
-   systems [Ubuntu](https://github.com/eli-ams/scymol/blob/master/distributables/scymol_linux.tar.xz).
-2. Extract the contents into a directory, namely `/`.
-3. Run `python setup.py` to initiate the set up process. Make sure there is Internet connection. This script will create
+Scymol can be installed using 
+`conda install eli.ams::scymol` (https://anaconda.org/eli.ams/scymol). This approach is currently only compatible with
+Unix-based operating systems. Windows support will come soon.
+
+### 2. Installation Script (Linux/Windows)
+
+
+1. Download Scymol's installation script
+   for [Windows](https://github.com/eli-ams/scymol/blob/master/distributables/scymol_windows.rar) or for Unix-based
+   systems ([Ubuntu](https://github.com/eli-ams/scymol/blob/master/distributables/scymol_linux.tar.xz)).
+2. Extract the contents into a directory, namely `/` and `cd` to it.
+3. Run `python setup.py` to initiate the set-up process. (Note: `setup.py` not to be confused with GitHub's). Make sure there is Internet connection. This script will create
    a `/scymol` directory, containing Scymol's source files, virtual environment, and all its dependencies. The script
    will also create a shortcut to run Scymol in `/.` *Note: Make sure [distutils](https://pypi.org/project/setuptools/)
    is installed in the Python used to run `setup.py`.*
@@ -39,7 +46,7 @@ placing the contents of `src.tar` into the directory of the virtual environment.
    `venv/Scripts/python main.py`
    ![[resources/video1.mp4](resources/video1.mp4)]
 
-### 2. Manual setup
+### 3. Manual setup
 
 1. Create a Python environment (Using [Python 3.7](https://www.python.org/downloads/) or above).
 2. Install the following libraries / dependencies:
