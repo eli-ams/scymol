@@ -7,5 +7,4 @@ sobol_seq
 numba
 rdkit
 file_read_backwards
-sigfig
 pysimm@ git+https://github.com/polysimtools/pysimm.git

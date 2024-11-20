@@ -60,7 +60,6 @@ Unix-based operating systems. Windows support will arrive soon.
     - [numba](https://pypi.org/project/numba/)
     - [rdkit](https://pypi.org/project/rdkit/)
     - [file_read_backwards](https://pypi.org/project/file-read-backwards/)
-    - [sigfig](https://pypi.org/project/sigfig/)
 1. Extract the contents of `src.tar` (located in `/install`) into an accessible `/` folder.
 2. Run `main.py`.
 3. Once Scymol opens, go to tab `4. Run` and make sure that the absolute paths

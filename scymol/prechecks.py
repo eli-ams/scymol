@@ -20,7 +20,6 @@ def check_dependencies() -> List[str]:
     - numba
     - rdkit
     - file_read_backwards
-    - sigfig
 
     :return: List of missing module names.
     :rtype: List[str]
@@ -40,7 +39,6 @@ def check_dependencies() -> List[str]:
         "numba",
         "rdkit",
         "file_read_backwards",
-        "sigfig",
     ]
 
     # Initialize an empty list to store the names of missing modules

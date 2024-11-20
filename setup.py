@@ -27,7 +27,6 @@ setup(
         "numba",
         "rdkit",
         "file_read_backwards",
-        "sigfig",
         "pysimm @ git+https://github.com/polysimtools/pysimm.git",  # Replace with actual URL and branch or commit
     ],
     package_data={
