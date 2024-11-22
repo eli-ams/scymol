@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QMainWindow
 ui_path = importlib.resources.files("scymol.frontend.uis").joinpath("setcell_window.ui")
 
 # Open the .ui file as a file object and load it with uic.loadUiType
-with ui_path.open("r") as f:
+with ui_path.open("r", encoding="utf8") as f:
     Ui_SetCellWindow, _ = uic.loadUiType(f)
 
 

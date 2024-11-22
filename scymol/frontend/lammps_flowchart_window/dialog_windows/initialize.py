@@ -10,7 +10,7 @@ ui_path = importlib.resources.files("scymol.frontend.uis").joinpath(
 )
 
 # Open the .ui file as a file object and load it with uic.loadUiType
-with ui_path.open("r") as f:
+with ui_path.open("r", encoding="utf8") as f:
     Ui_InitializeWindow, _ = uic.loadUiType(f)
 
 

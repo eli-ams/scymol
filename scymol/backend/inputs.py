@@ -10,7 +10,7 @@ layer_offset = 25.0
 file_output_name = 'cco'
 number_of_trials = 500
 potential_energy_limit = 0.0
-run_command = 'mpiexec -n 16 lmp -in stage_1.in'
+run_command = 'mpiexec -n 12 lmp -in stage_1.in'
 use_forcefield = 'Gaff2'
 charges = 'gasteiger'
 

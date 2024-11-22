@@ -8,7 +8,7 @@ from scymol.logging_functions import print_to_log, log_function_call
 ui_path = importlib.resources.files("scymol.frontend.uis").joinpath("lmpstage_npt.ui")
 
 # Open the .ui file as a file object and load it with uic.loadUiType
-with ui_path.open("r") as f:
+with ui_path.open("r", encoding="utf8") as f:
     Ui_NptWindow, _ = uic.loadUiType(f)
 
 
