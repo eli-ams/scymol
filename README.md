@@ -20,30 +20,33 @@ outside the realm of Physics, Chemistry, or Numerical Computing.
 ## Installation
 
 Scymol can be installed using one of three methods: 1) Using Conda, 2) through the use of a custom installation
-script that can be downloaded below, or 3) By manually setting up a Python environment, installing all required libraries and dependencies, and
+script that can be downloaded below, or 3) By manually setting up a Python environment, installing all required
+libraries and dependencies, and
 placing the contents of https://github.com/eli-ams/scymol into the directory of the virtual environment.
 
-### 1. Using Conda (Linux)
+### 1. Using Conda (Linux only)
 
-Scymol can be installed using 
-`conda install -c eli.ams -c conda-forge scymol` (https://anaconda.org/eli.ams/scymol). This approach is currently only compatible with
+Scymol can be installed using
+`conda install -c eli.ams -c conda-forge scymol` (https://anaconda.org/eli.ams/scymol). This approach is currently only
+compatible with
 Unix-based operating systems. Windows support will arrive soon.
 
 ### 2. Installation Script (Linux/Windows)
 
-
-1. Download Scymol's installation script
-   for [Windows](https://github.com/eli-ams/scymol/blob/master/distributables/scymol_windows.rar) or for Unix-based
-   systems ([Ubuntu](https://github.com/eli-ams/scymol/blob/master/distributables/scymol_linux.tar.xz)).
-2. Extract the contents into a directory, namely `/` and `cd` to it.
-3. Run `python setup.py` to initiate the set-up process. (Note: `setup.py` not to be confused with GitHub's). Make sure there is Internet connection. This script will create
-   a `/scymol` directory, containing Scymol's source files, virtual environment, and all its dependencies. The script
-   will also create a shortcut to run Scymol in `/.` *Note: Make sure [distutils](https://pypi.org/project/setuptools/)
-   is installed in the Python used to run `setup.py`.*
-4. Run `run_scymol.bat` (Windows) or `run_scymol.sh` (Ubuntu) to run Scymol. You can also activate Scymol's virtual
-   environment and execute `main.py` from it, using:
-   `cd /scymol/`
-   `venv/Scripts/python main.py`
+1. Download
+   Scymol's [install.py script](https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/install.py).
+2. Place it on a local directory, namely `/`.
+3. Using a command line / terminal, run `python install.py --mpi-lammps` to initiate the set-up process. Make
+   sure there is Internet connection. This script will set up
+   a `/scymol` directory, downloading Scymol's source files from GitHub along with a Python Virtual Environment and all
+   necessary dependencies.
+   The flag `--mpi-lammps` flag directs the script to download
+   precompiled libraries for OpenMPI and LAMMPS if they are not already present on your system. If you prefer to use
+   your own installation of MPI or LAMMPS, omit this flag. These precompiled libraries are available for both Windows
+   and Ubuntu and are intended for users seeking a seamless, ready-to-use Scymol setup. The script will also create a
+   shortcut to run Scymol in `/`
+4. Run `run_scymol.bat` (Windows) or `run_scymol.sh` (Linux) to run Scymol. You can also activate Scymol's Virtual
+   Environment and invoke `scymol` to run Scymol.
    ![[resources/video1.mp4](resources/video1.mp4)]
 
 ### 3. Manual setup
@@ -60,9 +63,9 @@ Unix-based operating systems. Windows support will arrive soon.
     - [numba](https://pypi.org/project/numba/)
     - [rdkit](https://pypi.org/project/rdkit/)
     - [file_read_backwards](https://pypi.org/project/file-read-backwards/)
-1. Extract the contents of `src.tar` (located in `/install`) into an accessible `/` folder.
-2. Run `main.py`.
-3. Once Scymol opens, go to tab `4. Run` and make sure that the absolute paths
+3. Extract the contents of `src.tar` (located in `/install`) into an accessible `/` folder.
+4. Run `main.py`.
+5. Once Scymol opens, go to tab `4. Run` and make sure that the absolute paths
    to [LAMMPS'](https://www.lammps.org/download.html) binaries and the parallelization library (
    e.g., [OpenMPI](https://www.open-mpi.org/)) are typed into fields `4.1 LAMMPS` and `4.2 Parallelization`. The command
    displayed in the `Command to run` field should resemble the one used to run other simulations outside Scymol in your
@@ -73,18 +76,11 @@ Unix-based operating systems. Windows support will arrive soon.
 
 Scymol relies on [LAMMPS'](https://www.lammps.org/download.html) to run simulations and is best executed with a
 parallelization library, such as [OpenMPI](https://www.open-mpi.org/). The
-automatic installation files provided with Scymol include a precompiled version of both LAMMPS and OpenMPI for exclusive
+automatic installation files provided  include a precompiled version of both LAMMPS and OpenMPI for exclusive
 use with the software. However, users may opt to use their own global versions of LAMMPS and/or MPI. In such cases, it
 is essential to adjust the execution commands in Tab 4 ("Run") within Scymol, ensuring that the absolute paths to the
 LAMMPS and/or MPI binaries are correctly specified. The final execution command in `Command to run` should match the
 format required to run a simulation on the user's system (e.g., `mpiexec -n 4 lmp input.dat`).
-
-In this GitHub distribution, the `lammps+mpi/` directory contains files with the binaries for a self-contained version
-of
-LAMMPS and OpenMPI. To use these, extract the contents of the file corresponding to your operating system into the
-`lammps+mpi/` folder. As of now, only Windows ([windows_lammps+mpi.tar.xz](lammps%2Bmpi%2Fwindows_lammps%2Bmpi.tar.xz))
-and Ubuntu ([unix_lammps+mpi.tar.xz](lammps%2Bmpi%2Funix_lammps%2Bmpi.tar.xz)) are included. Other binaries will be
-added later.
 
 ## Sample Simulation
 
