@@ -67,22 +67,35 @@ class RunningProcessDialog(QDialog):
         """
         Update the progress bar based on the mixture processing stage.
 
-        This method updates the progress bar to reflect the current stage of mixture processing.
+        This method updates the progress bar to reflect the current stage of mixture processing,
+        waiting for the necessary folder to appear if it doesn't exist immediately.
 
         :return: None
         :rtype: None
         """
+        import time
 
-        # Get the latest mixture folder by count.
-        self.current_mixture = int(
-            (
-                fron2back_static_functions.get_latest_mixture_folder_by_count(
-                    output_dir=importlib.resources.files("scymol").joinpath(
-                        "output", f"{self.job_id}"
-                    )
+        # Poll for the latest mixture folder by count with a timeout.
+        timeout = 10  # Timeout in seconds
+        poll_interval = 0.1  # Polling interval in seconds
+        start_time = time.time()
+
+        while True:
+            try:
+                self.current_mixture = int(
+                    (
+                        fron2back_static_functions.get_latest_mixture_folder_by_count(
+                            output_dir=importlib.resources.files("scymol").joinpath(
+                                "output", f"{self.job_id}"
+                            )
+                        )
+                    ).split("_")[-1]
                 )
-            ).split("_")[-1]
-        )
+                break  # Exit loop if successful
+            except FileNotFoundError:
+                if time.time() - start_time > timeout:
+                    raise TimeoutError("Timed out waiting for mixture folder.")
+                time.sleep(poll_interval)
 
         # Update the progress bar's value.
         self.ui.progressBar_2.setValue(self.current_mixture)
