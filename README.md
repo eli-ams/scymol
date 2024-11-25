@@ -34,7 +34,7 @@ Unix-based operating systems. Windows support will arrive soon.
 ### 2. Installation Script (Linux/Windows)
 
 1. Download
-   Scymol's [install.py script](https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/install.py).
+   Scymol's [install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/install.py).
 2. Place it on a local directory, namely `/`.
 3. Using a command line / terminal, run `python install.py --mpi-lammps` to initiate the set-up process. Make
    sure there is Internet connection. This script will set up
