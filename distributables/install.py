@@ -14,12 +14,33 @@ def create_virtual_environment(venv_dir):
     venv.create(venv_dir, with_pip=True)
     print("Virtual environment created.")
 
-def install_package(venv_dir, repo_url):
-    """Install the package from the given GitHub repository."""
+def download_and_install_package(venv_dir, zip_url):
+    """Download and install the package from a GitHub ZIP file."""
+    print(f"Downloading package from {zip_url}...")
+    zip_file = "scymol.zip"
+    urllib.request.urlretrieve(zip_url, zip_file)
+    print("Package downloaded.")
+
+    # Extract the ZIP file
+    extract_dir = "scymol_repo"
+    os.makedirs(extract_dir, exist_ok=True)
+    with zipfile.ZipFile(zip_file, "r") as zip_ref:
+        zip_ref.extractall(extract_dir)
+    print("Package extracted.")
+
+    # Locate setup.py in the extracted directory
+    repo_dir = os.path.join(extract_dir, os.listdir(extract_dir)[0])
+
+    # Install the package using pip
     pip_executable = os.path.join(venv_dir, "Scripts" if is_windows() else "bin", "pip" + (".exe" if is_windows() else ""))
-    print(f"Installing package from {repo_url}...")
-    subprocess.check_call([pip_executable, "install", f"scymol @ git+{repo_url}"])
+    print("Installing the package...")
+    subprocess.check_call([pip_executable, "install", repo_dir])
     print("Package installed.")
+
+    # Clean up
+    shutil.rmtree(extract_dir)
+    os.remove(zip_file)
+    print("Temporary files removed.")
 
 def download_and_extract_dependency(venv_dir, file_url):
     """Download and extract the LAMMPS+MPI dependency, flattening the structure."""
@@ -70,7 +91,6 @@ def extract_tar_xz(tar_file, target_dir):
     
     print(f"{tar_file} extracted to {target_dir} preserving symlinks and permissions.")
 
-
 def create_activation_script(venv_dir, script_dir):
     """Create a .sh or .bat script to activate the environment and run scymol."""
     script_name = "run_scymol.bat" if is_windows() else "run_scymol.sh"
@@ -115,12 +135,12 @@ def main():
     script_dir = os.getcwd()
 
     # URLs for the package and the dependency
-    repo_url = "https://github.com/eli-ams/scymol.git"
+    zip_url = "https://github.com/eli-ams/scymol/archive/refs/heads/master.zip"
     file_url = get_dependency_url()
 
     try:
         create_virtual_environment(venv_dir)
-        install_package(venv_dir, repo_url)
+        download_and_install_package(venv_dir, zip_url)
         if args.mpi_lammps:
             download_and_extract_dependency(venv_dir, file_url)
         create_activation_script(venv_dir, script_dir)
@@ -129,4 +149,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
