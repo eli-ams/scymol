@@ -40,6 +40,7 @@ class Molecule:
         self.smiles: str = info["smiles"]
         self.rotate: str = info["rotate"]
         self.mol_obj = self._smiles_to_obj_mol(self.smiles)
+        self.generate_lowest_energy_conformer()
         self.mw_gmol: float = Chem.rdMolDescriptors.CalcExactMolWt(self.mol_obj)
 
     def update_name_and_id(self) -> None:
@@ -175,6 +176,53 @@ class Molecule:
         for i, coord in enumerate(final_coordinates):
             conf.SetAtomPosition(i, tuple(coord))
 
+    def generate_lowest_energy_conformer(self, num_conformers=10, prune_rms_thresh=0.25, max_iterations=5000):
+        """
+        Generate multiple diverse conformers, optimize their geometry, and find the lowest-energy one.
+
+        Parameters:
+        - smiles (str): SMILES string of the molecule.
+        - num_conformers (int): Number of conformers to generate.
+        - prune_rms_thresh (float): RMSD threshold for pruning similar conformers.
+        - max_iterations (int): Maximum iterations for MMFF optimization.
+
+        Returns:
+        - lowest_energy_mol (Mol): Molecule with the lowest-energy conformation.
+        - energies (list): List of (conformer_id, energy) tuples.
+        """
+        # Embed multiple conformers with diversity control
+        conformer_ids = AllChem.EmbedMultipleConfs(
+            self.mol_obj,
+            numConfs=num_conformers,
+            randomSeed=42,
+            pruneRmsThresh=prune_rms_thresh
+        )
+
+        # Initialize MMFF properties
+        mmff_props = AllChem.MMFFGetMoleculeProperties(self.mol_obj)
+        energies = []
+
+        for conf_id in conformer_ids:
+            try:
+                # Optimize each conformer using MMFF and calculate its energy
+                ff = AllChem.MMFFGetMoleculeForceField(self.mol_obj, mmff_props, confId=conf_id)
+                ff.Minimize(maxIts=max_iterations, forceTol=0.0001, energyTol=1e-6)
+                energy = ff.CalcEnergy()
+                energies.append((conf_id, energy))
+            except Exception as e:
+                print(f"Failed to process Conformer ID {conf_id}: {e}")
+
+        if not energies:
+            raise RuntimeError("No valid conformers generated or optimized!")
+
+        # Find the lowest-energy conformer
+        lowest_energy_id, lowest_energy = min(energies, key=lambda x: x[1])
+
+        # Return molecule with the lowest-energy conformer highlighted
+        lowest_energy_mol = Chem.Mol(self.mol_obj)
+
+        return lowest_energy_mol
+
     @classmethod
     def reset_counters(cls: Type["Molecule"]) -> None:
         """Reset the global_counter and molecule_counter to their initial states."""
@@ -206,7 +254,5 @@ class Molecule:
             raise ValueError("Invalid SMILES string provided.")
 
         mol_with_h = Chem.AddHs(mol)
-        AllChem.EmbedMolecule(mol_with_h)
-        AllChem.MMFFOptimizeMolecule(mol_with_h)
 
         return mol_with_h
