@@ -210,7 +210,7 @@ class Molecule:
                 energy = ff.CalcEnergy()
                 energies.append((conf_id, energy))
             except Exception as e:
-                print(f"Failed to process Conformer ID {conf_id}: {e}")
+                raise RuntimeError(f"Failed to process Conformer ID {conf_id}: {e}")
 
         if not energies:
             raise RuntimeError("No valid conformers generated or optimized!")
