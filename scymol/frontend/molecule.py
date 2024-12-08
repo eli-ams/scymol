@@ -5,6 +5,11 @@ from rdkit.Chem import AllChem
 from rdkit.Chem import Draw, Descriptors
 from typing import Optional, Union
 from scymol.logging_functions import print_to_log, log_function_call
+from scymol.static_functions import (
+    extract_molecule_blocks_from_pdb_file,
+    read_pdb_file,
+    mol_objects_from_pdb_blocks,
+)
 
 
 class Molecule:
@@ -71,11 +76,33 @@ class Molecule:
                 raise ValueError("Invalid .mol file")
 
         elif self.source_type == "pdb":
-            with open(self.source, "r") as f:
-                pdb_block: str = f.read()
-            self.mol_obj = Chem.MolFromPDBBlock(pdb_block)
-            if self.mol_obj is None:
-                raise ValueError("Invalid .pdb file")
+            try:
+                # Step 1: Read PDB file lines
+                pdb_file_lines = read_pdb_file(self.source)
+                # Step 2: Extract molecule blocks from PDB lines
+                pdb_blocks = extract_molecule_blocks_from_pdb_file(pdb_file_lines)
+            except (FileNotFoundError, IOError) as e:
+                raise ValueError(f"Error reading .pdb file: {e}")
+
+            if len(pdb_blocks) != 1:
+                raise ValueError(
+                    f"Invalid .pdb file: Expected exactly 1 molecule block, found {len(pdb_blocks)}"
+                )
+
+            # Step 3: Create molecular object from the first block
+            try:
+                mol_obj = mol_objects_from_pdb_blocks([pdb_blocks[0]])[0]
+            except IndexError:
+                raise ValueError("Error creating molecular object from .pdb block")
+
+            # Step 4: Validate molecular object
+            if mol_obj is None:
+                raise ValueError(
+                    "Failed to create a valid molecular object from .pdb file"
+                )
+
+            self.mol_obj = mol_obj
+            self.minimize()
 
         elif self.source_type == "rdkit_mol":
             self.mol_obj = self.source.mol_obj

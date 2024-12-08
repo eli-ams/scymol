@@ -94,10 +94,10 @@ class LoadMoleculesContextMenu:
                     minimize=False,
                     generate_image=True,
                 )
-            except:
+            except Exception as e:
                 static_functions.display_message(
                     title="Error parsing SMILES",
-                    message=f"Smiles string [{smiles_window.input_smiles}] could not be parsed using Rdkit.",
+                    message=f"Smiles string [{smiles_window.input_smiles}] could not be parsed using Rdkit.\n{e}",
                     dialog_type="error",
                 )
                 return
@@ -126,10 +126,10 @@ class LoadMoleculesContextMenu:
                     minimize=False,
                     generate_image=True,
                 )
-            except:
+            except Exception as e:
                 static_functions.display_message(
                     title="Error parsing file",
-                    message=f"Mol file could not be parsed using Rdkit.",
+                    message=f"Mol file could not be parsed using Rdkit.\n{e}",
                     dialog_type="error",
                 )
                 return
@@ -151,17 +151,25 @@ class LoadMoleculesContextMenu:
         name = os.path.splitext(os.path.basename(pdb))[0]
         if pdb:
             try:
+                static_functions.display_message(
+                    title="Attention: Connectivity in PDB files",
+                    message=f"PDB files do not contain connectivity information. "
+                    f"Scymol will use Rdkit's function rdDetermineBonds.DetermineBondOrders() "
+                    f"to deduce bonds in [{name}]",
+                    dialog_type="warning",
+                )
+
                 self.main_window.molecules_objects[name] = Molecule(
                     source_type="pdb",
                     source=pdb,
-                    hydrogenate=True,
+                    hydrogenate=False,
                     minimize=False,
                     generate_image=True,
                 )
-            except:
+            except Exception as e:
                 static_functions.display_message(
                     title="Error parsing file",
-                    message=f"Pdb file could not be parsed using Rdkit.",
+                    message=f"Pdb file could not be parsed using Rdkit.\n{e}",
                     dialog_type="error",
                 )
                 return
@@ -187,10 +195,10 @@ class LoadMoleculesContextMenu:
                 minimize=False,
                 generate_image=False,
             )
-        except:
+        except Exception as e:
             static_functions.display_message(
                 title="Error parsing file",
-                message=f"Pdb file could not be parsed using Rdkit.",
+                message=f"MolObject file could not be parsed using Rdkit.\n{e}",
                 dialog_type="error",
             )
             return

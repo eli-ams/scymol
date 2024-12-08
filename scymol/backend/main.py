@@ -169,8 +169,9 @@ class JobRunner:
 
             # Run the LAMMPS stage with the specified settings.
             lammps_stage.run(
-                run_command=inputs.run_command.replace("-in stage_1.in",
-                                                       f"-in stage_{stage_nbr + 1}.in"),
+                run_command=inputs.run_command.replace(
+                    "-in stage_1.in", f"-in stage_{stage_nbr + 1}.in"
+                ),
             )
 
             # Update the previous LAMMPS stage for data processing.

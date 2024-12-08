@@ -6,6 +6,8 @@ from typing import Literal
 from PyQt5.QtWidgets import QMessageBox
 from file_read_backwards import FileReadBackwards
 from rdkit import Chem
+from rdkit.Chem import rdDetermineBonds
+
 from scymol.logging_functions import print_to_log, log_function_call
 
 
@@ -532,6 +534,92 @@ def get_last_trajectory(
             f.write("\n".join(header_lines + data_lines))
 
     return header_lines, data_lines
+
+
+@log_function_call
+def read_pdb_file(filename: str) -> list:
+    """
+    Reads the contents of a PDB file and returns it as a list of lines.
+
+    :param filename: The path to the PDB file.
+    :type filename: str
+    :return: A list containing the lines of the file.
+    :rtype: list
+    """
+    with open(filename, "r") as file:
+        lines = file.read().splitlines()
+    return lines
+
+
+@log_function_call
+def extract_molecule_blocks_from_pdb_file(pdb_lines: list) -> list:
+    """
+    Extracts and groups molecules from a list of PDB file lines into separate blocks.
+
+    Parses through the given list of lines from a PDB file, identifying and grouping lines
+    related to individual molecules. Each molecule block starts with the file's header and includes
+    lines describing the molecule's atoms and connections. Blocks are delineated by the presence of
+    "HETATM" lines for atom information and "CONECT" lines for connectivity, with a new block starting
+    after each "CONECT" line. The parsing stops upon reaching the "MASTER" record, indicating the end
+    of relevant molecule data.
+
+    :param pdb_lines: The lines of a PDB file.
+    :type pdb_lines: list
+    :return: A list of molecule blocks, each represented as a list of lines.
+    :rtype: list
+    """
+    pdb_molecule_blocks = []
+    molecule = []
+    header = pdb_lines[0]
+    new_molecule = True
+
+    pdb_lines = [
+        line
+        for line in pdb_lines
+        if line.startswith("HETATM") or line.startswith("CONECT")
+    ]
+
+    for line in pdb_lines:
+        if line.startswith("HETATM") and new_molecule:
+            if molecule:
+                pdb_molecule_blocks.append(molecule)
+            molecule = [header]
+            new_molecule = False
+        molecule.append(line)
+        if line.startswith("CONECT"):
+            new_molecule = True
+    if molecule:
+        pdb_molecule_blocks.append(molecule)
+    return pdb_molecule_blocks
+
+
+@log_function_call
+def mol_objects_from_pdb_blocks(blocks: list) -> list:
+    """
+    Converts molecule blocks into RDKit molecule objects.
+
+    Iterates over a list of molecule blocks, each block being a list of strings representing lines
+    from a PDB file. For each block, the function constructs a molecule object using RDKit, attempts
+    to determine bond orders, and generates a mol object of the molecule.
+
+    Note: PDB files do not contain connectivity information. Therefore, the program uses Rdkit's function
+    "rdDetermineBonds.DetermineBondOrders(mol)" to deduce bonds in a molecule. The original authors of this function is
+    Jan Jensen and his research group, who published "xyz2mol" to estimate bonds and bond orders from Quantum Mechanical
+    simulations. Read more at https://greglandrum.github.io/rdkit-blog/posts/2022-12-18-introducing-rdDetermineBonds.html.
+
+    :param blocks: A list of molecule blocks, each a list of strings from a PDB file.
+    :type blocks: list
+    :return: A list of RDKit molecule objects.
+    :rtype: list
+    """
+    mol_objects = []
+    for block in blocks:
+        pdb_block = "\n".join(block)
+        mol = Chem.MolFromPDBBlock(pdb_block, sanitize=True, removeHs=False)
+        if mol:
+            rdDetermineBonds.DetermineBondOrders(mol)
+            mol_objects.append(mol)
+    return mol_objects
 
 
 @log_function_call
