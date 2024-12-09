@@ -195,8 +195,14 @@ def main():
 
     # Define dependencies
     dependencies = ["python=3.10", "pip"]
-    if args.mpi_lammps and os.name != "nt":
-        dependencies += ["lammps", "openmpi"]
+    if args.mpi_lammps:
+        if os.name == "nt":
+            # Use binary download for Windows
+            file_url = get_dependency_url()
+            download_and_extract_dependency(env_dir, file_url)
+        else:
+            # Install via Conda on Linux
+            dependencies += ["lammps", "openmpi"]
 
     # URLs for the Scymol package and dependencies
     zip_url = "https://github.com/eli-ams/scymol/archive/refs/heads/master.zip"
@@ -223,3 +229,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
