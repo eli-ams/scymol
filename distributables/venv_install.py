@@ -8,11 +8,13 @@ import tarfile
 import shutil
 import argparse
 
+
 def create_virtual_environment(venv_dir):
     """Create a virtual environment in the specified directory."""
     print(f"Creating virtual environment at {venv_dir}...")
     venv.create(venv_dir, with_pip=True)
     print("Virtual environment created.")
+
 
 def download_and_install_package(venv_dir, zip_url):
     """Download and install the package from a GitHub ZIP file."""
@@ -32,7 +34,11 @@ def download_and_install_package(venv_dir, zip_url):
     repo_dir = os.path.join(extract_dir, os.listdir(extract_dir)[0])
 
     # Install the package using pip
-    pip_executable = os.path.join(venv_dir, "Scripts" if is_windows() else "bin", "pip" + (".exe" if is_windows() else ""))
+    pip_executable = os.path.join(
+        venv_dir,
+        "Scripts" if is_windows() else "bin",
+        "pip" + (".exe" if is_windows() else ""),
+    )
     print("Installing the package...")
     subprocess.check_call([pip_executable, "install", repo_dir])
     print("Package installed.")
@@ -41,6 +47,7 @@ def download_and_install_package(venv_dir, zip_url):
     shutil.rmtree(extract_dir)
     os.remove(zip_file)
     print("Temporary files removed.")
+
 
 def download_and_extract_dependency(venv_dir, file_url):
     """Download and extract the LAMMPS+MPI dependency, flattening the structure."""
@@ -64,10 +71,11 @@ def download_and_extract_dependency(venv_dir, file_url):
     os.remove(local_file)
     print("Temporary files removed.")
 
+
 def extract_zip(zip_file, target_dir):
     """Extract and flatten a .zip file."""
     print(f"Extracting {zip_file}...")
-    with zipfile.ZipFile(zip_file, 'r') as zip_ref:
+    with zipfile.ZipFile(zip_file, "r") as zip_ref:
         for member in zip_ref.namelist():
             # Get the base name (file name only) to flatten the structure
             filename = os.path.basename(member)
@@ -78,25 +86,29 @@ def extract_zip(zip_file, target_dir):
                     shutil.copyfileobj(source, target)
     print(f"{zip_file} extracted to {target_dir}.")
 
+
 def extract_tar_xz(tar_file, target_dir):
     """Extract a .tar.xz file preserving the original structure, symlinks, and permissions."""
     print(f"Extracting {tar_file}...")
-    
+
     # Ensure the target directory exists
     os.makedirs(target_dir, exist_ok=True)
-    
+
     # Open the tar file and extract all members
     with tarfile.open(tar_file, "r:xz") as tar_ref:
         tar_ref.extractall(path=target_dir)
-    
+
     print(f"{tar_file} extracted to {target_dir} preserving symlinks and permissions.")
+
 
 def create_activation_script(venv_dir, script_dir):
     """Create a .sh or .bat script to activate the environment and run scymol."""
     script_name = "run_scymol.bat" if is_windows() else "run_scymol.sh"
     script_path = os.path.join(script_dir, script_name)
 
-    activate_cmd = os.path.join(venv_dir, "Scripts" if is_windows() else "bin", "activate")
+    activate_cmd = os.path.join(
+        venv_dir, "Scripts" if is_windows() else "bin", "activate"
+    )
     run_cmd = "scymol"
 
     with open(script_path, "w") as script_file:
@@ -113,9 +125,11 @@ def create_activation_script(venv_dir, script_dir):
         os.chmod(script_path, 0o755)  # Make script executable on Unix-based systems
     print(f"Activation script created at {script_path}.")
 
+
 def is_windows():
     """Check if the operating system is Windows."""
     return os.name == "nt"
+
 
 def get_dependency_url():
     """Get the appropriate dependency URL based on the operating system."""
@@ -124,10 +138,17 @@ def get_dependency_url():
     else:
         return "https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/lammps+mpi_ubuntu64.tar.xz"
 
+
 def main():
     """Main function to create venv, install package, and handle dependencies."""
-    parser = argparse.ArgumentParser(description="Setup and run Scymol with optional dependencies.")
-    parser.add_argument("--mpi-lammps", action="store_true", help="Download and install the LAMMPS+MPI dependency.")
+    parser = argparse.ArgumentParser(
+        description="Setup and run Scymol with optional dependencies."
+    )
+    parser.add_argument(
+        "--mpi-lammps",
+        action="store_true",
+        help="Download and install the LAMMPS+MPI dependency.",
+    )
     args = parser.parse_args()
 
     # Define the directory for the virtual environment
@@ -146,6 +167,7 @@ def main():
         create_activation_script(venv_dir, script_dir)
     except Exception as e:
         print(f"An error occurred: {e}")
+
 
 if __name__ == "__main__":
     main()
