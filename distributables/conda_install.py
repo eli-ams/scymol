@@ -220,8 +220,8 @@ def main():
         if args.mpi_lammps and os.name == "nt":
             download_and_extract_dependency(env_dir, file_url)
 
-        # Step 4: Create an activation script
-        create_activation_script(env_dir, os.getcwd())
+        # # Step 4: Create an activation script
+        # create_activation_script(env_dir, os.getcwd())
 
     except Exception as e:
         print(f"An error occurred: {e}")
