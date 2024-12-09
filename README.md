@@ -19,35 +19,54 @@ outside the realm of Physics, Chemistry, or Numerical Computing.
 
 ## Installation
 
-Scymol can be installed using one of three methods: 1) Using Conda, 2) through the use of a custom installation
-script that can be downloaded below, or 3) By manually setting up a Python environment, installing all required
-libraries and dependencies, and
-placing the contents of https://github.com/eli-ams/scymol into the directory of the virtual environment.
+### 1. Using Conda (Linux, x64)
 
-### 1. Using Conda (Linux only)
-
-Scymol can be installed using
+>Scymol can be installed using
 `conda install -c eli.ams -c conda-forge scymol` (https://anaconda.org/eli.ams/scymol). This approach is currently only
 compatible with
 Unix-based operating systems. Windows support will arrive soon.
 
-### 2. Installation Script (Linux/Windows)
+Alternatively, you can install Scymol through the use
+of [env.yml script](https://github.com/eli-ams/scymol/blob/master/env.yml). Place the YAML file in the root directory
+`/`. Then, open a command line and run: `conda env create -f env.yml`.
+This will create a Conda environment named scymol with all the necessary dependencies. Once the installation is
+complete, activate the environment:
+`conda activate scymol`. Finally, invoke `scymol` to launch the program.
+
+### 2. Automatic Installation Scripts (Ubuntu/Windows, x64)
+
+Scymol can also be installed using these automated setup scripts, which configure local virtual environments with all
+the necessary dependencies for Scymol to run.
+
+#### 2.1 Virtual Environment
 
 1. Download
-   Scymol's [install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/install.py).
+   Scymol's [venv_install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/venv_install.py).
 2. Place it on a local directory, namely `/`.
 3. Using a command line / terminal, run `python install.py --mpi-lammps` to initiate the set-up process. Make
    sure there is Internet connection. This script will set up
    a `/scymol` directory, downloading Scymol's source files from GitHub along with a Python Virtual Environment and all
-   necessary dependencies.
-   The flag `--mpi-lammps` flag directs the script to download
-   precompiled libraries for OpenMPI and LAMMPS if they are not already present on your system. If you prefer to use
-   your own installation of MPI or LAMMPS, omit this flag. These precompiled libraries are available for both Windows
-   and Ubuntu and are intended for users seeking a seamless, ready-to-use Scymol setup. The script will also create a
-   shortcut to run Scymol in `/`
+   necessary dependencies. The script will also create a shortcut to run Scymol in `/`. There are two flags:
+    - `--mpi-lammps`: (optional): Directs the script to download and set up precompiled OpenMPI and LAMMPS libraries.
+      These libraries are placed in the environment's PATH directory.
 4. Run `run_scymol.bat` (Windows) or `run_scymol.sh` (Linux) to run Scymol. You can also activate Scymol's Virtual
    Environment and invoke `scymol` to run Scymol.
    ![[resources/video1.mp4](resources/video1.mp4)]
+
+#### 2.2 Conda Environment
+
+1. Download
+   Scymol's [conda_install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/conda_install.py).
+2. Place it on a local directory, namely `/`.
+3. Using a command line / terminal, run `python install.py --mpi-lammps` to initiate the set-up
+   process. This script will set up a local Conda Environment in `/`, downloading and setting
+   up everything that is needed to run Scymol. There are three flags:
+    - `--mpi-lammps`: (optional): Directs the script to download and set up precompiled OpenMPI and LAMMPS libraries.
+      These libraries are placed in the environment's PATH directory.
+    - `no-scymol`: (optional): Skips installing Scymol files from its GitHub repository. This option is useful if you
+      only need the environment, such as when cloning a repository to work in an IDE like PyCharm.
+4. Activate the Scymol Conda environment and run Scymol by invoking `scymol`. Note that this environment is local, so
+   you must specify its path when activating it, such as `conda activate /home/user_name/Desktop/scymol`.
 
 ### 3. Manual setup
 
@@ -76,7 +95,7 @@ Unix-based operating systems. Windows support will arrive soon.
 
 Scymol relies on [LAMMPS'](https://www.lammps.org/download.html) to run simulations and is best executed with a
 parallelization library, such as [OpenMPI](https://www.open-mpi.org/). The
-automatic installation files provided  include a precompiled version of both LAMMPS and OpenMPI for exclusive
+automatic installation files provided include a precompiled version of both LAMMPS and OpenMPI for exclusive
 use with the software. However, users may opt to use their own global versions of LAMMPS and/or MPI. In such cases, it
 is essential to adjust the execution commands in Tab 4 ("Run") within Scymol, ensuring that the absolute paths to the
 LAMMPS and/or MPI binaries are correctly specified. The final execution command in `Command to run` should match the
