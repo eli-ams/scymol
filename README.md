@@ -21,10 +21,10 @@ outside the realm of Physics, Chemistry, or Numerical Computing.
 
 ### 1. Using Conda (Linux, x64)
 
->Scymol can be installed using
+> Scymol can be installed using
 `conda install -c eli.ams -c conda-forge scymol` (https://anaconda.org/eli.ams/scymol). This approach is currently only
-compatible with
-Unix-based operating systems. Windows support will arrive soon.
+> compatible with
+> Unix-based operating systems. Windows support will arrive soon.
 
 Alternatively, you can install Scymol through the use
 of [env.yml script](https://github.com/eli-ams/scymol/blob/master/env.yml). Place the YAML file in the root directory
@@ -70,8 +70,9 @@ the necessary dependencies for Scymol to run.
 
 ### 3. Manual setup
 
-1. Create a Python environment (Using [Python 3.7](https://www.python.org/downloads/) or above).
-2. Install the following libraries / dependencies:
+1. Create a Python environment (Using [Python 3.9](https://www.python.org/downloads/) or above).
+2. Clone Scymol's repository from [GitHub repository](https://github.com/eli-ams/scymol). Use `seup.py` to install the
+   following libraries / dependencies:
     - [PyQt5](https://pypi.org/project/PyQt5/)
     - [numpy](https://pypi.org/project/numpy/)
     - [scipy](https://pypi.org/project/scipy/)
@@ -82,14 +83,12 @@ the necessary dependencies for Scymol to run.
     - [numba](https://pypi.org/project/numba/)
     - [rdkit](https://pypi.org/project/rdkit/)
     - [file_read_backwards](https://pypi.org/project/file-read-backwards/)
-3. Extract the contents of `src.tar` (located in `/install`) into an accessible `/` folder.
-4. Run `main.py`.
-5. Once Scymol opens, go to tab `4. Run` and make sure that the absolute paths
-   to [LAMMPS'](https://www.lammps.org/download.html) binaries and the parallelization library (
-   e.g., [OpenMPI](https://www.open-mpi.org/)) are typed into fields `4.1 LAMMPS` and `4.2 Parallelization`. The command
-   displayed in the `Command to run` field should resemble the one used to run other simulations outside Scymol in your
-   computer (e.g., `mpiexec -n 4 lmp input.dat`). Scymol executes this command from within the active job's directory,
-   located in `/output/{job_id}/mixture_{mixture_nbr}/`; relative paths are to be used with care.
+3. Ensure that LAMMPS and MPI are installed. If they are not, download the precompiled libraries
+   for Windows or Ubuntu. Then, to make them globally accessible to Scymol, place the LAMMPS and MPI binaries in the
+   `Scripts/` or `bin/` folder of your virtual
+   environment.
+
+4. Run `/scymol/main.py` or simply invoke `scymol` while the virtual environment is active.
 
 ## MPI & LAMMPS
 

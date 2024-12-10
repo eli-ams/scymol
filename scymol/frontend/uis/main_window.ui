@@ -26,7 +26,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -81,13 +81,25 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>758</width>
-             <height>422</height>
+             <width>744</width>
+             <height>482</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
              <widget class="QGroupBox" name="groupBox_4">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>192</height>
+               </size>
+              </property>
               <property name="title">
                <string>2.1 Setup</string>
               </property>
@@ -336,14 +348,14 @@
                  <enum>QLayout::SetMinimumSize</enum>
                 </property>
                 <item>
-                 <widget class="QPushButton" name="pushbutton_forcefield_test">
+                 <widget class="QPushButton" name="pushbutton_test_forcefield_test">
                   <property name="text">
                    <string>Test</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushbutton2_forcefield_test">
+                 <widget class="QPushButton" name="pushbutton_edit_forcefield_test">
                   <property name="text">
                    <string>Edit</string>
                   </property>

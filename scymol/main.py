@@ -225,6 +225,9 @@ class MainWindow(BaseMainWindow):
         :return: None
         :rtype: None
         """
+        if self.run_mode == "mixture+pysimm+lammps":
+            if not self.tab3.test_force_field(verbose=False):
+                return
         backend_connector = BackendConnector(self)
         backend_connector.checking_ui_inputs_before_submitting_job()
         if backend_connector.submit_job:

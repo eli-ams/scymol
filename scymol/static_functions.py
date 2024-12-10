@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 import pickle
 from typing import List, Dict, Any, Optional, Tuple
 from typing import Literal
@@ -660,3 +661,83 @@ def display_message(
         dialog.setIcon(QMessageBox.NoIcon)
 
     dialog.exec_()
+
+
+@log_function_call
+def write_temp_mol_file(mol_obj, temp_mol_file: str) -> None:
+    """
+    Write the molecule object to a temporary MOL file.
+
+    Args:
+        mol_obj: The molecule object to be written.
+        temp_mol_file (str): The path to the temporary MOL file.
+    """
+    Chem.MolToMolFile(mol_obj, temp_mol_file)
+    fix_mol_file(file=temp_mol_file)
+
+
+@log_function_call
+def fix_mol_file(file: str) -> None:
+    """
+    Fix a Molecular Structure File (MOL file) by making specific modifications.
+
+    :param file: The path to the MOL file to be fixed.
+    :type file: str
+    :return: None
+    """
+    nbr_of_atoms: int = 0
+    nbr_of_bonds: int = 0
+
+    # Get the full path of the input file
+    full_path: str = os.path.abspath(file)
+    # Get the directory name from the full path
+    directory_name: str = os.path.dirname(full_path)
+    # Create the full path for the output file
+    write_file_path: str = os.path.join(directory_name, "fixed.mol")
+
+    with open(file=full_path, mode="r") as read_file, open(
+        write_file_path, "w"
+    ) as write_file:
+        for line in read_file:
+            line_split = line.split()
+            if len(line_split) == 10:
+                left_part, right_part = split_number(
+                    number_str=line_split[0], right_part_length=3
+                )
+                line_split[0] = " ".join([left_part, right_part])
+                write_file.write(" ".join(line_split) + "\n")
+            elif len(line_split) == 16:
+                nbr_of_atoms += 1
+                write_file.write(line)
+            elif len(line_split) == 4:
+                nbr_of_bonds += 1
+                write_file.write(line)
+            elif len(line_split) == 3:
+                nbr_of_bonds += 1
+                left_part, right_part = split_number(
+                    number_str=line_split[0], right_part_length=3
+                )
+                line_split[0] = " ".join([left_part, right_part])
+                write_file.write(" " + " ".join(line_split) + "\n")
+            else:
+                write_file.write(line)
+
+    # Replace the original MOL file with the fixed file
+    os.replace(write_file_path, full_path)
+
+
+@log_function_call
+def split_number(number_str: str, right_part_length: int) -> tuple:
+    """
+    Split a string representation of a number into left and right parts.
+
+    :param number_str: The string representation of the number.
+    :type number_str: str
+    :param right_part_length: The length of the right part to extract.
+    :type right_part_length: int
+    :return: A tuple containing the left part and the right part of the string.
+    :rtype: tuple
+    """
+    left_part: str = number_str[:-right_part_length]
+    right_part: str = number_str[-right_part_length:]
+    return left_part, right_part
