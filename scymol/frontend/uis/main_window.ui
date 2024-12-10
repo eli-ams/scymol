@@ -107,7 +107,7 @@
                <item row="4" column="0">
                 <widget class="QGroupBox" name="groupBox_27">
                  <property name="title">
-                  <string>3.1.1 Layer offset</string>
+                  <string>2.2.3 Layer offset</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_34">
                   <item>
@@ -129,7 +129,7 @@
                <item row="1" column="1">
                 <widget class="QGroupBox" name="groupBox_26">
                  <property name="title">
-                  <string>2.2.1 Initial density factor</string>
+                  <string>2.2.2 Initial density factor</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_33">
                   <item>
@@ -176,7 +176,7 @@
                <item row="5" column="0">
                 <widget class="QGroupBox" name="groupBox_31">
                  <property name="title">
-                  <string>2.2.1 Potential energy threshold</string>
+                  <string>2.2.5 Potential energy threshold</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_38">
                   <item>
@@ -204,7 +204,7 @@
                <item row="4" column="1">
                 <widget class="QGroupBox" name="groupBox_32">
                  <property name="title">
-                  <string>2.2.1 Distribution method</string>
+                  <string>2.2.4 Distribution method</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_39">
                   <item>
@@ -222,7 +222,7 @@
                <item row="5" column="1">
                 <widget class="QGroupBox" name="groupBox_30">
                  <property name="title">
-                  <string>2.2.1 Final density estimate (rough)</string>
+                  <string>2.2.6 Final density (estimate)</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_37">
                   <item>
@@ -285,12 +285,24 @@
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
             <widget class="QGroupBox" name="groupBox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="title">
               <string>3.1.1 Selection</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_5">
               <item>
                <widget class="QComboBox" name="combobox_force_field">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <item>
                  <property name="text">
                   <string>Gaff2</string>
@@ -318,17 +330,66 @@
                 </item>
                </widget>
               </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontallayout_forcefield_test">
+                <property name="sizeConstraint">
+                 <enum>QLayout::SetMinimumSize</enum>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="pushbutton_forcefield_test">
+                  <property name="text">
+                   <string>Test</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushbutton2_forcefield_test">
+                  <property name="text">
+                   <string>Edit</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalspacer_forcefield_test">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::MinimumExpanding</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
              </layout>
             </widget>
            </item>
            <item>
             <widget class="QGroupBox" name="groupBox_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="title">
               <string>3.1.2 Charges</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
               <item>
                <widget class="QComboBox" name="combobox_charges">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <item>
                  <property name="text">
                   <string>gasteiger</string>
@@ -340,6 +401,22 @@
                  </property>
                 </item>
                </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Minimum</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </widget>
@@ -356,7 +433,7 @@
            <bool>true</bool>
           </property>
           <property name="checked">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
