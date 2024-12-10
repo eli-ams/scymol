@@ -4,7 +4,6 @@ import platform
 import subprocess
 from pathlib import Path
 
-import pkg_resources
 import pysimm.system as pysimm_system
 from pysimm import forcefield as pysimm_forcefield
 from PyQt5.QtWidgets import QWidget, QListWidget
