@@ -171,7 +171,7 @@ def get_dependency_url():
         str: URL to the dependency file.
     """
     if os.name == "nt":
-        return "https://github.com/eli-ams/raw/refs/heads/master/distributables/lammps+mpi_win64.zip"
+        return "https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/lammps+mpi_win64.zip"
     else:
         return "https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/lammps+mpi_ubuntu64.tar.xz"
 
