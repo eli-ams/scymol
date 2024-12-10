@@ -67,7 +67,6 @@ the necessary dependencies for Scymol to run.
       only need the environment, such as when cloning a repository to work in an IDE like PyCharm.
 4. Activate the Scymol Conda environment and run Scymol by invoking `scymol`. Note that this environment is local, so
    you must specify its path when activating it, such as `conda activate /home/user_name/Desktop/scymol`.
-[![Video Title](https://img.youtube.com/vi/K4TOrB7at0Y/0.jpg)](https://www.youtube.com/watch?v=K4TOrB7at0Y)
 
 ### 3. Manual setup
 
