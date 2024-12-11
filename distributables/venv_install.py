@@ -181,7 +181,7 @@ def create_activation_script(venv_dir, script_dir):
 
 
 def is_windows():
-    """Check if the operating system is Windows."""
+    """Check if the operating system is Windows (x64)."""
     return os.name == "nt"
 
 
