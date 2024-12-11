@@ -9,6 +9,7 @@ from scymol.static_functions import (
     extract_molecule_blocks_from_pdb_file,
     read_pdb_file,
     mol_objects_from_pdb_blocks,
+    build_and_infer_bonds_from_xyz,
 )
 
 
@@ -102,7 +103,14 @@ class Molecule:
                 )
 
             self.mol_obj = mol_obj
-            self.minimize()
+
+        elif self.source_type == "xyz":
+            try:
+                mol_obj = build_and_infer_bonds_from_xyz(self.source)
+            except (FileNotFoundError, IOError) as e:
+                raise ValueError(f"Error reading .xyz file: {e}")
+
+            self.mol_obj = mol_obj
 
         elif self.source_type == "rdkit_mol":
             self.mol_obj = self.source.mol_obj

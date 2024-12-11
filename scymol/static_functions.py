@@ -4,10 +4,13 @@ import os
 import pickle
 from typing import List, Dict, Any, Optional, Tuple
 from typing import Literal
+
+import numpy as np
 from PyQt5.QtWidgets import QMessageBox
 from file_read_backwards import FileReadBackwards
 from rdkit import Chem
 from rdkit.Chem import rdDetermineBonds
+from rdkit.Chem.rdDetermineBonds import DetermineConnectivity, DetermineBondOrders
 
 from scymol.logging_functions import print_to_log, log_function_call
 
@@ -741,3 +744,66 @@ def split_number(number_str: str, right_part_length: int) -> tuple:
     left_part: str = number_str[:-right_part_length]
     right_part: str = number_str[-right_part_length:]
     return left_part, right_part
+
+
+@log_function_call
+def read_xyz(filename: str) -> list[tuple[str, np.ndarray]]:
+    """
+    Read an XYZ file and return a list of tuples containing element symbols and coordinates.
+    Format:
+        <N number of atoms>
+        comment line
+        <element1> <X1> <Y1> <Z1>
+        ...
+        <elementN> <XN> <YN> <ZN>
+
+    :param filename: The path to the XYZ file.
+    :type filename: str
+    :return: A list of tuples, where each tuple contains an element symbol and a NumPy array of coordinates.
+    :rtype: list[tuple[str, np.ndarray]]
+    """
+    with open(filename, "r") as file:
+        lines = file.readlines()
+        atoms = [
+            (line.split()[0], np.array(list(map(float, line.split()[1:]))))
+            for line in lines[2 : 2 + int(lines[0].strip())]
+        ]
+    return atoms
+
+
+@log_function_call
+def create_molecule_with_positions(atoms: list[tuple[str, np.ndarray]]) -> Chem.Mol:
+    """
+    Create an RDKit molecule with specified atoms and their 3D positions.
+
+    :param atoms: A list of tuples, where each tuple contains an element symbol and a NumPy array of 3D coordinates.
+    :type atoms: list[tuple[str, np.ndarray]]
+    :return: An RDKit molecule with atoms and their assigned positions.
+    :rtype: Chem.Mol
+    """
+    mol = Chem.RWMol()
+    conformer = Chem.Conformer(len(atoms))
+
+    for idx, (element, position) in enumerate(atoms):
+        atom_idx = mol.AddAtom(Chem.Atom(element))
+        conformer.SetAtomPosition(atom_idx, position)
+
+    mol.AddConformer(conformer, assignId=True)
+    return mol
+
+
+@log_function_call
+def build_and_infer_bonds_from_xyz(xyz_file: str) -> Chem.Mol:
+    """
+    Read an XYZ file, create an RDKit molecule with positions, and infer bonds and bond orders.
+
+    :param xyz_file: The path to the XYZ file.
+    :type xyz_file: str
+    :return: An RDKit molecule with inferred bonds and bond orders.
+    :rtype: Chem.Mol
+    """
+    atoms = read_xyz(xyz_file)
+    mol = create_molecule_with_positions(atoms)
+    DetermineConnectivity(mol)
+    DetermineBondOrders(mol)
+    return mol

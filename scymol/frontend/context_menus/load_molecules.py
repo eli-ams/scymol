@@ -67,6 +67,13 @@ class LoadMoleculesContextMenu:
                 triggered=self.load_molecule_pdb_file,
             )
         )
+        menu.addAction(
+            QAction(
+                "Load from .xyz file",
+                self.main_window,
+                triggered=self.load_molecule_xyz_file,
+            )
+        )
         menu.exec_(
             self.main_window.addMoleculeButton.mapToGlobal(
                 self.main_window.addMoleculeButton.rect().bottomLeft()
@@ -90,7 +97,7 @@ class LoadMoleculesContextMenu:
                 self.main_window.molecules_objects[name] = Molecule(
                     source_type="smiles",
                     source=smiles_window.input_smiles,
-                    hydrogenate=True,
+                    hydrogenate=False,  # Search for lowest energy conformer already hydrogenates and minimizes molecule.
                     minimize=False,
                     generate_image=True,
                 )
@@ -122,7 +129,7 @@ class LoadMoleculesContextMenu:
                 self.main_window.molecules_objects[name] = Molecule(
                     source_type="mol",
                     source=mol,
-                    hydrogenate=True,
+                    hydrogenate=False,
                     minimize=False,
                     generate_image=True,
                 )
@@ -163,13 +170,53 @@ class LoadMoleculesContextMenu:
                     source_type="pdb",
                     source=pdb,
                     hydrogenate=False,
-                    minimize=False,
+                    minimize=True,
                     generate_image=True,
                 )
             except Exception as e:
                 static_functions.display_message(
                     title="Error parsing file",
                     message=f"Pdb file could not be parsed using Rdkit.\n{e}",
+                    dialog_type="error",
+                )
+                return
+            self.tab1.add_molecule(name=name, number=50, rotate=True)
+
+    @log_function_call
+    def load_molecule_xyz_file(self) -> None:
+        """
+        Load a molecule from a .xyz file.
+
+        Allows the user to select a .xyz file from their file system and loads the molecule from this file.
+
+        :return: None
+        :rtype: None
+        """
+        xyz, _ = QFileDialog.getOpenFileName(
+            self.main_window, "Open .xyz file", "", "XYZ files (*.xyz)"
+        )
+        name = os.path.splitext(os.path.basename(xyz))[0]
+        if xyz:
+            try:
+                static_functions.display_message(
+                    title="Attention: Connectivity in XYZ files",
+                    message=f"XYZ files do not contain connectivity information. "
+                    f"Scymol will use Rdkit's function rdDetermineBonds.DetermineBondOrders() "
+                    f"to deduce bonds in [{name}]",
+                    dialog_type="warning",
+                )
+
+                self.main_window.molecules_objects[name] = Molecule(
+                    source_type="xyz",
+                    source=xyz,
+                    hydrogenate=False,
+                    minimize=True,
+                    generate_image=True,
+                )
+            except Exception as e:
+                static_functions.display_message(
+                    title="Error parsing file",
+                    message=f"XYZ file could not be parsed using Rdkit.\n{e}",
                     dialog_type="error",
                 )
                 return
