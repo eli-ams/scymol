@@ -43,7 +43,7 @@ the necessary dependencies for Scymol to run.
 1. Download
    Scymol's [venv_install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/venv_install.py).
 2. Place it on a local directory, namely `/`.
-3. Using a command line / terminal, run `python install.py --mpi-lammps` to initiate the set-up process. Make
+3. Using a command line / terminal, run `python venv_install.py --mpi-lammps` to initiate the set-up process. Make
    sure there is Internet connection. This script will set up
    a `/scymol` directory, downloading Scymol's source files from GitHub along with a Python Virtual Environment and all
    necessary dependencies. The script will also create a shortcut to run Scymol in `/`. There are two flags:
@@ -58,7 +58,7 @@ the necessary dependencies for Scymol to run.
 1. Download
    Scymol's [conda_install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/conda_install.py).
 2. Place it on a local directory, namely `/`.
-3. Using a command line / terminal, run `python install.py --mpi-lammps` to initiate the set-up
+3. Using a Conda command line / terminal, run `python conda_install.py --mpi-lammps` to initiate the set-up
    process. This script will set up a local Conda Environment in `/`, downloading and setting
    up everything that is needed to run Scymol. There are three flags:
     - `--mpi-lammps`: (optional): Directs the script to download and set up precompiled OpenMPI and LAMMPS libraries.
@@ -71,7 +71,7 @@ the necessary dependencies for Scymol to run.
 ### 3. Manual setup
 
 1. Create a Python environment (Using [Python 3.9](https://www.python.org/downloads/) or above).
-2. Clone Scymol's repository from [GitHub repository](https://github.com/eli-ams/scymol). Use `seup.py` to install the
+2. Clone Scymol's repository from [GitHub repository](https://github.com/eli-ams/scymol). Use `setup.py` to install the
    following libraries / dependencies:
     - [PyQt5](https://pypi.org/project/PyQt5/)
     - [numpy](https://pypi.org/project/numpy/)
