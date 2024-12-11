@@ -49,56 +49,80 @@ def download_and_install_package(venv_dir, zip_url):
     print("Temporary files removed.")
 
 
-def download_and_extract_dependency(venv_dir, file_url):
-    """Download and extract the LAMMPS+MPI dependency, flattening the structure."""
-    print(f"Downloading dependency from {file_url}...")
+def download_and_install_openmpi_and_lammps(venv_dir, file_url):
+    """Download and install OpenMPI and LAMMPS locally in the virtual environment."""
+    if is_windows():
+        print("Skipping OpenMPI build on Windows.")
+        return
+
+    print("Downloading OpenMPI...")
+    openmpi_url = (
+        "https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.5.tar.gz"
+    )
+    openmpi_tar = "openmpi-4.1.5.tar.gz"
+
+    urllib.request.urlretrieve(openmpi_url, openmpi_tar)
+    print("OpenMPI downloaded.")
+
+    # Extract the OpenMPI tarball
+    extract_dir_openmpi = "openmpi_src"
+    os.makedirs(extract_dir_openmpi, exist_ok=True)
+    with tarfile.open(openmpi_tar, "r:gz") as tar_ref:
+        tar_ref.extractall(path=extract_dir_openmpi)
+    print("OpenMPI extracted.")
+
+    # Build and install OpenMPI in the virtual environment's bin directory
+    openmpi_src_dir = os.path.join(
+        extract_dir_openmpi, os.listdir(extract_dir_openmpi)[0]
+    )
+    install_dir = os.path.join(venv_dir, "bin")
+    os.makedirs(install_dir, exist_ok=True)
+
+    print("Building and installing OpenMPI...")
+    subprocess.check_call(["./configure", f"--prefix={venv_dir}"], cwd=openmpi_src_dir)
+    subprocess.check_call(["make", "-j"], cwd=openmpi_src_dir)
+    subprocess.check_call(["make", "install"], cwd=openmpi_src_dir)
+    print("OpenMPI installed locally in the virtual environment.")
+
+    # Clean up OpenMPI files
+    shutil.rmtree(extract_dir_openmpi)
+    os.remove(openmpi_tar)
+
+    print(f"Downloading LAMMPS from {file_url}...")
     is_zip = file_url.endswith(".zip")
     local_file = "lammps_mpi.zip" if is_zip else "lammps_mpi.tar.xz"
 
     urllib.request.urlretrieve(file_url, local_file)
-    print("Dependency downloaded.")
+    print("LAMMPS downloaded.")
 
-    # Determine target directory
-    target_dir = os.path.join(venv_dir, "Scripts" if is_windows() else "bin")
-    os.makedirs(target_dir, exist_ok=True)
-
+    # Extract the LAMMPS file
+    extract_dir_lammps = "lammps_src"
+    os.makedirs(extract_dir_lammps, exist_ok=True)
     if is_zip:
-        extract_zip(local_file, target_dir)
+        with zipfile.ZipFile(local_file, "r") as zip_ref:
+            zip_ref.extractall(extract_dir_lammps)
     else:
-        extract_tar_xz(local_file, target_dir)
+        with tarfile.open(local_file, "r:xz") as tar_ref:
+            tar_ref.extractall(path=extract_dir_lammps)
+    print("LAMMPS extracted.")
 
-    # Clean up the downloaded file
+    # Locate and copy the LAMMPS binary
+    lammps_binary = None
+    for root, _, files in os.walk(extract_dir_lammps):
+        if "lmp" in files:
+            lammps_binary = os.path.join(root, "lmp")
+            break
+
+    if not lammps_binary:
+        raise FileNotFoundError("LAMMPS binary not found in the extracted files.")
+
+    shutil.copy(lammps_binary, install_dir)
+    print(f"LAMMPS binary copied to {install_dir}.")
+
+    # Clean up LAMMPS files
+    shutil.rmtree(extract_dir_lammps)
     os.remove(local_file)
     print("Temporary files removed.")
-
-
-def extract_zip(zip_file, target_dir):
-    """Extract and flatten a .zip file."""
-    print(f"Extracting {zip_file}...")
-    with zipfile.ZipFile(zip_file, "r") as zip_ref:
-        for member in zip_ref.namelist():
-            # Get the base name (file name only) to flatten the structure
-            filename = os.path.basename(member)
-            if filename:  # Only process files, skip directories
-                source = zip_ref.open(member)
-                target = open(os.path.join(target_dir, filename), "wb")
-                with source, target:
-                    shutil.copyfileobj(source, target)
-    print(f"{zip_file} extracted to {target_dir}.")
-
-
-def extract_tar_xz(tar_file, target_dir):
-    """Extract a .tar.xz file preserving the original structure, symlinks, and permissions."""
-    print(f"Extracting {tar_file}...")
-
-    # Ensure the target directory exists
-    os.makedirs(target_dir, exist_ok=True)
-
-    # Open the tar file and extract all members
-    with tarfile.open(tar_file, "r:xz") as tar_ref:
-        tar_ref.extractall(path=target_dir)
-
-    print(f"{tar_file} extracted to {target_dir} preserving symlinks and permissions.")
 
 
 def create_activation_script(venv_dir, script_dir):
@@ -136,7 +160,7 @@ def get_dependency_url():
     if is_windows():
         return "https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/lammps+mpi_win64.zip"
     else:
-        return "https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/lammps+mpi_ubuntu64.tar.xz"
+        return "https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/lammps_ubuntu64.tar.xz"
 
 
 def main():
@@ -147,7 +171,7 @@ def main():
     parser.add_argument(
         "--mpi-lammps",
         action="store_true",
-        help="Download and install the LAMMPS+MPI dependency.",
+        help="Download and install OpenMPI and LAMMPS locally.",
     )
     args = parser.parse_args()
 
@@ -155,7 +179,7 @@ def main():
     venv_dir = os.path.join(os.getcwd(), "scymol", "venv")
     script_dir = os.getcwd()
 
-    # URLs for the package and the dependency
+    # URL for the package
     zip_url = "https://github.com/eli-ams/scymol/archive/refs/heads/master.zip"
     file_url = get_dependency_url()
 
@@ -163,7 +187,7 @@ def main():
         create_virtual_environment(venv_dir)
         download_and_install_package(venv_dir, zip_url)
         if args.mpi_lammps:
-            download_and_extract_dependency(venv_dir, file_url)
+            download_and_install_openmpi_and_lammps(venv_dir, file_url)
         create_activation_script(venv_dir, script_dir)
     except Exception as e:
         print(f"An error occurred: {e}")

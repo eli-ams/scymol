@@ -173,7 +173,7 @@ def get_dependency_url():
     if os.name == "nt":
         return "https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/lammps+mpi_win64.zip"
     else:
-        return "https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/lammps+mpi_ubuntu64.tar.xz"
+        return None
 
 
 def main():

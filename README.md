@@ -35,25 +35,11 @@ complete, activate the environment:
 
 ### 2. Automatic Installation Scripts (Ubuntu/Windows, x64)
 
-Scymol can also be installed using these automated setup scripts, which configure local virtual environments with all
+Scymol can also be installed using automated setup scripts, which configure local virtual environments with all
 the necessary dependencies for Scymol to run.
+> This method requires internet connection and a globally accessible version of Python 3.9 or higher.
 
-#### 2.1 Virtual Environment
-
-1. Download
-   Scymol's [venv_install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/venv_install.py).
-2. Place it on a local directory, namely `/`.
-3. Using a command line / terminal, run `python venv_install.py --mpi-lammps` to initiate the set-up process. Make
-   sure there is Internet connection. This script will set up
-   a `/scymol` directory, downloading Scymol's source files from GitHub along with a Python Virtual Environment and all
-   necessary dependencies. The script will also create a shortcut to run Scymol in `/`. There are two flags:
-    - `--mpi-lammps`: (optional): Directs the script to download and set up precompiled OpenMPI and LAMMPS libraries.
-      These libraries are placed in the environment's PATH directory.
-4. Run `run_scymol.bat` (Windows) or `run_scymol.sh` (Linux) to run Scymol. You can also activate Scymol's Virtual
-   Environment and invoke `scymol` to run Scymol.
-   ![[resources/video1.mp4](resources/video1.mp4)]
-
-#### 2.2 Conda Environment
+#### 2.1 Conda Environment
 
 1. Download
    Scymol's [conda_install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/conda_install.py).
@@ -68,11 +54,29 @@ the necessary dependencies for Scymol to run.
 4. Activate the Scymol Conda environment and run Scymol by invoking `scymol`. Note that this environment is local, so
    you must specify its path when activating it, such as `conda activate /home/user_name/Desktop/scymol`.
 
-### 3. Manual setup
+#### 2.2 Virtual Environment
+
+> Successfully tested on Windows 10 and 11 (x64). Currently in Beta for Linux distributions, with successful testing
+> only on Ubuntu x64.
+
+1. Download
+   Scymol's [venv_install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/venv_install.py).
+2. Place it on a local directory, namely `/`.
+3. Using a command line / terminal, run `python venv_install.py --mpi-lammps` to initiate the set-up process. Make
+   sure there is Internet connection. This script will set up
+   a `/scymol` directory, downloading Scymol's source files from GitHub along with a Python Virtual Environment and all
+   necessary dependencies. The script will also create a shortcut to run Scymol in `/`. There are two flags:
+    - `--mpi-lammps`: (optional): Directs the script to download and set up precompiled OpenMPI and LAMMPS libraries.
+      These libraries are placed in the environment's PATH directory.
+4. Run `run_scymol.bat` (Windows) or `run_scymol.sh` (Linux) to run Scymol. You can also activate Scymol's Virtual
+   Environment and invoke `scymol` to run Scymol.
+   ![[resources/video1.mp4](resources/video1.mp4)]
+
+### 2.3 Manual setup
 
 1. Create a Python environment (Using [Python 3.9](https://www.python.org/downloads/) or above).
-2. Clone Scymol's repository from [GitHub repository](https://github.com/eli-ams/scymol). Use `setup.py` to install the
-   following libraries / dependencies:
+2. Clone Scymol's repository from its [GitHub repository](https://github.com/eli-ams/scymol). Use `setup.py` to install
+   the following libraries / dependencies:
     - [PyQt5](https://pypi.org/project/PyQt5/)
     - [numpy](https://pypi.org/project/numpy/)
     - [scipy](https://pypi.org/project/scipy/)
@@ -83,11 +87,12 @@ the necessary dependencies for Scymol to run.
     - [numba](https://pypi.org/project/numba/)
     - [rdkit](https://pypi.org/project/rdkit/)
     - [file_read_backwards](https://pypi.org/project/file-read-backwards/)
-3. Ensure that LAMMPS and MPI are installed. If they are not, download the precompiled libraries
-   for Windows or Ubuntu. Then, to make them globally accessible to Scymol, place the LAMMPS and MPI binaries in the
-   `Scripts/` or `bin/` folder of your virtual
-   environment.
 
+   > The `setup.py` file defines the entry point for Scymol using the keyword `scymol`, with the entry point set as
+   `scymol = scymol.main:main`.
+
+3. Ensure that LAMMPS and MPI are available to Scymol upon calling commands like `mpiexec -n 12 lammps -in stage_1.in`
+   environment.
 4. Run `/scymol/main.py` or simply invoke `scymol` while the virtual environment is active.
 
 ## MPI & LAMMPS
