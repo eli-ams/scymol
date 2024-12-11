@@ -52,10 +52,40 @@ def download_and_install_package(venv_dir, zip_url):
 def download_and_install_openmpi_and_lammps(venv_dir, file_url):
     """Download and install OpenMPI and LAMMPS locally in the virtual environment."""
     if is_windows():
-        print("Skipping OpenMPI build on Windows.")
+        print("Downloading LAMMPS + MPI for Windows...")
+        is_zip = file_url.endswith(".zip")
+        local_file = "lammps_mpi.zip" if is_zip else "lammps_mpi.tar.xz"
+
+        urllib.request.urlretrieve(file_url, local_file)
+        print("LAMMPS + MPI downloaded.")
+
+        # Extract the entire archive
+        extract_dir = "lammps_mpi_src"
+        os.makedirs(extract_dir, exist_ok=True)
+        if is_zip:
+            with zipfile.ZipFile(local_file, "r") as zip_ref:
+                zip_ref.extractall(extract_dir)
+        else:
+            with tarfile.open(local_file, "r:xz") as tar_ref:
+                tar_ref.extractall(path=extract_dir)
+        print("LAMMPS + MPI extracted.")
+
+        # Copy all files to the virtual environment's bin directory
+        target_dir = os.path.join(venv_dir, "Scripts")
+        os.makedirs(target_dir, exist_ok=True)
+        for root, _, files in os.walk(extract_dir):
+            for file in files:
+                shutil.copy(os.path.join(root, file), target_dir)
+
+        print(f"LAMMPS + MPI copied to {target_dir}.")
+
+        # Clean up
+        shutil.rmtree(extract_dir)
+        os.remove(local_file)
+        print("Temporary files removed.")
         return
 
-    print("Downloading OpenMPI...")
+    print("Downloading OpenMPI for Linux...")
     openmpi_url = (
         "https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.5.tar.gz"
     )
@@ -88,7 +118,7 @@ def download_and_install_openmpi_and_lammps(venv_dir, file_url):
     shutil.rmtree(extract_dir_openmpi)
     os.remove(openmpi_tar)
 
-    print(f"Downloading LAMMPS from {file_url}...")
+    print("Downloading LAMMPS binary for Linux...")
     is_zip = file_url.endswith(".zip")
     local_file = "lammps_mpi.zip" if is_zip else "lammps_mpi.tar.xz"
 
