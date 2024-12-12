@@ -1,12 +1,10 @@
-import os
-import platform
-import subprocess
-import venv
-import urllib.request
-import zipfile
-import tarfile
-import shutil
 import argparse
+import os
+import shutil
+import subprocess
+import urllib.request
+import venv
+import zipfile
 
 
 def create_virtual_environment(venv_dir):
@@ -50,107 +48,32 @@ def download_and_install_package(venv_dir, zip_url):
 
 
 def download_and_install_openmpi_and_lammps(venv_dir, file_url):
-    """Download and install OpenMPI and LAMMPS locally in the virtual environment."""
-    if is_windows():
-        print("Downloading LAMMPS + MPI for Windows...")
-        is_zip = file_url.endswith(".zip")
-        local_file = "lammps_mpi.zip" if is_zip else "lammps_mpi.tar.xz"
-
-        urllib.request.urlretrieve(file_url, local_file)
-        print("LAMMPS + MPI downloaded.")
-
-        # Extract the entire archive
-        extract_dir = "lammps_mpi_src"
-        os.makedirs(extract_dir, exist_ok=True)
-        if is_zip:
-            with zipfile.ZipFile(local_file, "r") as zip_ref:
-                zip_ref.extractall(extract_dir)
-        else:
-            with tarfile.open(local_file, "r:xz") as tar_ref:
-                tar_ref.extractall(path=extract_dir)
-        print("LAMMPS + MPI extracted.")
-
-        # Copy all files to the virtual environment's bin directory
-        target_dir = os.path.join(venv_dir, "Scripts")
-        os.makedirs(target_dir, exist_ok=True)
-        for root, _, files in os.walk(extract_dir):
-            for file in files:
-                shutil.copy(os.path.join(root, file), target_dir)
-
-        print(f"LAMMPS + MPI copied to {target_dir}.")
-
-        # Clean up
-        shutil.rmtree(extract_dir)
-        os.remove(local_file)
-        print("Temporary files removed.")
-        return
-
-    print("Downloading OpenMPI for Linux...")
-    openmpi_url = (
-        "https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.5.tar.gz"
-    )
-    openmpi_tar = "openmpi-4.1.5.tar.gz"
-
-    urllib.request.urlretrieve(openmpi_url, openmpi_tar)
-    print("OpenMPI downloaded.")
-
-    # Extract the OpenMPI tarball
-    extract_dir_openmpi = "openmpi_src"
-    os.makedirs(extract_dir_openmpi, exist_ok=True)
-    with tarfile.open(openmpi_tar, "r:gz") as tar_ref:
-        tar_ref.extractall(path=extract_dir_openmpi)
-    print("OpenMPI extracted.")
-
-    # Build and install OpenMPI in the virtual environment's bin directory
-    openmpi_src_dir = os.path.join(
-        extract_dir_openmpi, os.listdir(extract_dir_openmpi)[0]
-    )
-    install_dir = os.path.join(venv_dir, "bin")
-    os.makedirs(install_dir, exist_ok=True)
-
-    print("Building and installing OpenMPI...")
-    subprocess.check_call(["./configure", f"--prefix={venv_dir}"], cwd=openmpi_src_dir)
-    subprocess.check_call(["make", "-j"], cwd=openmpi_src_dir)
-    subprocess.check_call(["make", "install"], cwd=openmpi_src_dir)
-    print("OpenMPI installed locally in the virtual environment.")
-
-    # Clean up OpenMPI files
-    shutil.rmtree(extract_dir_openmpi)
-    os.remove(openmpi_tar)
-
-    print("Downloading LAMMPS binary for Linux...")
+    """Download and install OpenMPI and LAMMPS locally in the virtual environment (Windows only)."""
+    print("Downloading LAMMPS + MPI for Windows...")
     is_zip = file_url.endswith(".zip")
     local_file = "lammps_mpi.zip" if is_zip else "lammps_mpi.tar.xz"
 
     urllib.request.urlretrieve(file_url, local_file)
-    print("LAMMPS downloaded.")
+    print("LAMMPS + MPI downloaded.")
 
-    # Extract the LAMMPS file
-    extract_dir_lammps = "lammps_src"
-    os.makedirs(extract_dir_lammps, exist_ok=True)
-    if is_zip:
-        with zipfile.ZipFile(local_file, "r") as zip_ref:
-            zip_ref.extractall(extract_dir_lammps)
-    else:
-        with tarfile.open(local_file, "r:xz") as tar_ref:
-            tar_ref.extractall(path=extract_dir_lammps)
-    print("LAMMPS extracted.")
+    # Extract the entire archive
+    extract_dir = "lammps_mpi_src"
+    os.makedirs(extract_dir, exist_ok=True)
+    with zipfile.ZipFile(local_file, "r") as zip_ref:
+        zip_ref.extractall(extract_dir)
+    print("LAMMPS + MPI extracted.")
 
-    # Locate and copy the LAMMPS binary
-    lammps_binary = None
-    for root, _, files in os.walk(extract_dir_lammps):
-        if "lmp" in files:
-            lammps_binary = os.path.join(root, "lmp")
-            break
+    # Copy all files to the virtual environment's bin directory
+    target_dir = os.path.join(venv_dir, "Scripts")
+    os.makedirs(target_dir, exist_ok=True)
+    for root, _, files in os.walk(extract_dir):
+        for file in files:
+            shutil.copy(os.path.join(root, file), target_dir)
 
-    if not lammps_binary:
-        raise FileNotFoundError("LAMMPS binary not found in the extracted files.")
+    print(f"LAMMPS + MPI copied to {target_dir}.")
 
-    shutil.copy(lammps_binary, install_dir)
-    print(f"LAMMPS binary copied to {install_dir}.")
-
-    # Clean up LAMMPS files
-    shutil.rmtree(extract_dir_lammps)
+    # Clean up
+    shutil.rmtree(extract_dir)
     os.remove(local_file)
     print("Temporary files removed.")
 
@@ -193,8 +116,34 @@ def get_dependency_url():
         return "https://github.com/eli-ams/scymol/raw/refs/heads/master/distributables/lammps_ubuntu64.tar.xz"
 
 
+def prompt_linux_mpi_lammps():
+    """Prompt Linux users about the MPI/LAMMPS installation limitations."""
+    print(
+        "\nWARNING: Installing OpenMPI and LAMMPS locally on Linux is currently in Beta and not recommended."
+    )
+    print("We recommend one of the following options:")
+    print("1) Install without MPI/LAMMPS and set it up manually later.")
+    print("2) Install Scymol using Conda, which handles dependencies more effectively.")
+    choice = input(
+        "Choose 1 to continue without MPI/LAMMPS, or press any other key to exit: "
+    )
+    return choice.strip() == "1"
+
+
+def prompt_spaces_in_path():
+    """Check for spaces in the current working directory and prompt the user."""
+    if " " in os.getcwd():
+        print(
+            "\nERROR: The installation directory contains spaces, which can cause issues."
+        )
+        print("Please use a directory path without spaces and try again.")
+        exit(1)
+
+
 def main():
     """Main function to create venv, install package, and handle dependencies."""
+    prompt_spaces_in_path()
+
     parser = argparse.ArgumentParser(
         description="Setup and run Scymol with optional dependencies."
     )
@@ -211,13 +160,22 @@ def main():
 
     # URL for the package
     zip_url = "https://github.com/eli-ams/scymol/archive/refs/heads/master.zip"
-    file_url = get_dependency_url()
 
     try:
         create_virtual_environment(venv_dir)
         download_and_install_package(venv_dir, zip_url)
+
         if args.mpi_lammps:
-            download_and_install_openmpi_and_lammps(venv_dir, file_url)
+            if is_windows():
+                dependency_url = get_dependency_url()
+                download_and_install_openmpi_and_lammps(venv_dir, dependency_url)
+            else:
+                if prompt_linux_mpi_lammps():
+                    print("Proceeding without MPI/LAMMPS installation...")
+                else:
+                    print("Exiting installation.")
+                    return
+
         create_activation_script(venv_dir, script_dir)
     except Exception as e:
         print(f"An error occurred: {e}")
