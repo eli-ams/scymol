@@ -28,7 +28,8 @@ outside the realm of Physics, Chemistry, or Numerical Computing.
 
 Alternatively, you can install Scymol through the use
 of [env.yml script](https://github.com/eli-ams/scymol/blob/master/env.yml). Place the YAML file in the root directory
-`/`. Then, open a command line and run: `conda env create -f env.yml`.
+`/`. The default environment name is `scymol`; however, you can modify it in the YAML file.
+Then, open a command line and run: `conda env create -f env.yml`.
 This will create a Conda environment named scymol with all the necessary dependencies. Once the installation is
 complete, activate the environment:
 `conda activate scymol`. Finally, invoke `scymol` to launch the program.
@@ -52,7 +53,10 @@ the necessary dependencies for Scymol to run.
     - `no-scymol`: (optional): Skips installing Scymol files from its GitHub repository. This option is useful if you
       only need the environment, such as when cloning a repository to work in an IDE like PyCharm.
 4. Activate the Scymol Conda environment and run Scymol by invoking `scymol`. Note that this environment is local, so
-   you must specify its path when activating it, such as `conda activate /home/user_name/Desktop/scymol`.
+   you must specify its path when activating it, such as `conda activate /path/to/local/dir/scymol`.
+
+> Note: When installing on Virtual Machines, Servers, or other environments with limited graphical interfaces, ensure
+> that `libxcb-xinerama0` is installed.
 
 #### 2.2 Virtual Environment
 
@@ -70,7 +74,6 @@ the necessary dependencies for Scymol to run.
       These libraries are placed in the environment's PATH directory.
 4. Run `run_scymol.bat` (Windows) or `run_scymol.sh` (Linux) to run Scymol. You can also activate Scymol's Virtual
    Environment and invoke `scymol` to run Scymol.
-   ![[resources/video1.mp4](resources/video1.mp4)]
 
 ### 2.3 Manual setup
 
@@ -133,7 +136,6 @@ this simulation are as follows:
   interest (e.g., `v_sysdensity`) and right-click to compute the column `Statistics`. You can also highlight two
   properties (e.g., `TimeStep` and `v_sysdensity`) and generate a XY-scatter plot between them.
 - To review the input scripts and output files, explore the directory `/output/{job_id}/mixture_{mixture_nbr}/`.
-  ![[resources/video2.mp4]](resources/video2.mp4)
 
 ## Software Functionalities
 
