@@ -273,4 +273,4 @@ the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)
 ## Credits
 
 Scymol was created by Eli I. Assaf (e.i.assaf@tudelft.nl), Elsa Maalouf (em40@aub.edu.lb), Xueyan Liu (
-x.liu@tudelft.nl), and Sandra Erkens (s.m.j.g.erkens@tudelft.nl). To cite, please refer to the manuscript (TBD).
+x.liu@tudelft.nl), and Sandra Erkens (s.m.j.g.erkens@tudelft.nl). To cite, please refer to the manuscript `Scymol: A python-based software package for initializing and running molecular dynamics simulations using LAMMPS` (DOI: [https://doi.org/10.1016/j.softx.2025.102044](https://doi.org/10.1016/j.softx.2025.102044)).
