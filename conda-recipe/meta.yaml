@@ -1,0 +1,63 @@
+{% set name = "scymol" %}
+{% set version = "2.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+# Build from the repository checkout. For a fully reproducible public release,
+# replace this with the tagged GitHub or PyPI source archive and its SHA-256.
+source:
+  path: ..
+
+build:
+  number: 0
+  noarch: python
+  script: "{{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv"
+
+requirements:
+  host:
+    - python >=3.10
+    - pip
+    - setuptools >=68
+    - wheel
+  run:
+    - python >=3.10
+    - pyside6 >=6.6
+    - rdkit
+    - numpy >=1.24
+    - moderngl >=5.8
+    - matplotlib-base >=3.7
+    # PySIMM is expected to be available from the eli.ams channel.
+    - pysimm
+    # These provide the simulation engine and MPI launcher used by Scymol.
+    # Current conda-forge LAMMPS builds support Linux and macOS, not Windows.
+    - lammps
+    - openmpi
+
+test:
+  imports:
+    - scymol
+  requires:
+    - pip
+  commands:
+    - python -c "import scymol; assert scymol.__version__ == '{{ version }}'"
+    - python -c "from importlib.metadata import version; assert version('scymol') == '{{ version }}'"
+    - pip check
+
+about:
+  home: https://github.com/eli-ams/scymol
+  dev_url: https://github.com/eli-ams/scymol
+  doc_url: https://github.com/eli-ams/scymol#readme
+  license: GPL-3.0-only
+  license_family: GPL
+  license_file: LICENSE
+  summary: Build molecular systems, design LAMMPS protocols, run simulations, and inspect results
+  description: |
+    Scymol is a PySide6 desktop workbench for constructing molecular systems,
+    preparing and executing LAMMPS simulations, and inspecting structures,
+    trajectories, logs, tables, and plots in a project-based workflow.
+
+extra:
+  recipe-maintainers:
+    - eli-ams

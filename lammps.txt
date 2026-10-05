@@ -1,0 +1,16 @@
+Use CMake’s most preset, explicitly enabling EXTRA-MOLECULE, which provides dihedral_style fourier:
+git clone https://github.com/lammps/lammps.git
+cd lammps
+
+cmake -S cmake -B build \
+  -C cmake/presets/most.cmake \
+  -D PKG_EXTRA-MOLECULE=ON \
+  -D BUILD_MPI=ON \
+  -D BUILD_OMP=ON \
+  -D CMAKE_BUILD_TYPE=Release
+
+cmake --build build -j
+cmake --install build
+Verify:
+build/lmp -h | grep -E "EXTRA-MOLECULE|fourier"
+For NVIDIA acceleration, additionally use -D PKG_KOKKOS=ON -D Kokkos_ENABLE_CUDA=ON; this requires a CUDA-capable compiler setup. The most preset intentionally excludes packages needing special third-party dependencies—you can enable those individually afterward.

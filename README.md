@@ -1,276 +1,294 @@
 # Scymol
 
-We present **Scymol**, a Python-based software package specifically designed to facilitate the setup and execution of
-molecular simulations in LAMMPS. Scymol comes equipped with a user-friendly interface, which simplifies the process of
-initializing molecular systems and defining simulation parameters. Moreover, the software generates and executes LAMMPS
-simulation sequences, enabling researchers to establish comprehensive simulation schemes, such as heating or deformation
-cycles, in a single run.
+**Build molecular systems, design LAMMPS protocols, run simulations, and inspect the results in one graphical workspace.**
 
-While this first iteration is limited to the creation of amorphous mixtures of molecules – mainly of hydrocarbon
-nature – Scymol intends to establish a solid foundation that is expandable and adaptable to a multitude of simulation
-types, gradually encompassing, in an easy-to-use interface – the vast number of functionalities that comprise the LAMMPS
-simulation engine.
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![PySide6](https://img.shields.io/badge/GUI-PySide6-41CD52?logo=qt&logoColor=white)](https://doc.qt.io/qtforpython-6/)
+[![LAMMPS](https://img.shields.io/badge/MD-LAMMPS-1F4E79)](https://www.lammps.org/)
+[![Version](https://img.shields.io/badge/version-2.0.0-00A6A6)](pyproject.toml)
+[![License: GPL v3](https://img.shields.io/badge/license-GPL--3.0-blue)](LICENSE)
 
-Through its successful application in diverse research projects and its modular design, Scymol demonstrates considerable
-promise as an indispensable tool for researchers aiming to carry out molecular dynamics simulations without sacrificing
-complexity or high-throughput capabilities in their methodologies, making the use of MD accessible to researchers
-outside the realm of Physics, Chemistry, or Numerical Computing.
-![[resources/picture2.png]](resources/picture2.png)
+<p align="center">
+  <img src="markdown_resources/results-browser.gif" alt="Scymol playing a LAMMPS trajectory in the integrated 3D viewer">
+</p>
+
+*Scymol keeps system construction, protocol design, execution, plotting, and trajectory inspection in one project. Animated workflow previews are shown below.*
+
+Scymol is a desktop workbench for preparing and running molecular simulations with [LAMMPS](https://www.lammps.org/). It keeps the molecular definition, generated structure, simulation protocol, execution history, and results together in a portable project directory.
+
+Scymol 2.0 is the next generation of the original [Scymol](https://github.com/eli-ams/scymol). It preserves Scymol's goal of making molecular simulation accessible without hiding the generated inputs or limiting advanced users to a rigid workflow. The new application adds project-based state, direct system import, visual protocol graphs, integrated 3D inspection, and a clearer foundation for reproducible and high-throughput workflows.
+
+```text
+Define or import  →  Build or reuse  →  Design protocol  →  Prepare and run  →  Inspect
+     System             Structure           Protocol             Run             Results
+```
+
+## Highlights
+
+- Draw molecular species in the built-in 2D editor or enter their SMILES representations.
+- Construct multi-species systems with explicit molecule counts and reproducible packing settings.
+- Import an existing LAMMPS data file, dump trajectory, or both.
+- Preserve compatible imported coordinates, topology, atom types, charges, and coefficients.
+- Generate 3D conformers and pack mixtures using deterministic Sobol sampling and clash rejection.
+- Assign force-field parameters and charges through [PySIMM](https://pysimm.org/).
+- Build simulation protocols as validated, branching graphs.
+- Generate a separate LAMMPS input script for every root-to-leaf protocol path.
+- Run LAMMPS from the interface, follow live output, cancel a process, or retry a failed run.
+- Explore structures, trajectories, logs, numeric tables, statistics, and plots without leaving the project.
+- Track generated artifacts with manifests and signatures that identify stale results after settings change.
+
+## Workflow
+
+### 1. Define the molecular system
+
+Start from molecular identities or from existing simulation files.
+
+In **Build** mode, draw or enter each molecular species, assign a name and copy count, and validate the definition before generating expensive artifacts. The editor supports atoms, bonds, chains, rings, cleanup, undo/redo, and image export.
+
+<p align="center">
+  <img src="markdown_resources/system-editor.gif" alt="Defining a multi-species molecular system in Scymol">
+</p>
+
+In **Import** mode, provide a LAMMPS data file, a dump trajectory, or both:
+
+- A data file supplies coordinates, topology, atom types, and—when present—force-field coefficients.
+- A trajectory replaces the starting coordinates with its last frame while retaining topology from the data file.
+- A trajectory without a data file can be converted into a reusable last-frame structure. Scymol infers its connectivity, which remains an approximation that must be reviewed carefully. Trajectories do not contain force-field coefficients, so direct reuse requires compatible coefficients elsewhere in the LAMMPS input.
+
+### 2. Build or reuse the structure
+
+For a newly defined system, Scymol generates molecular conformers, estimates a box from the target density, places copies using a seeded Sobol sequence, rejects steric clashes, and optionally applies random rotations. PySIMM then assigns the selected force field and charge model and writes a LAMMPS-compatible `structure.data` file.
+
+Available force-field choices currently include GAFF2, GAFF, Dreiding, and PCFF. Force-field coverage depends on the chemistry being modeled; generation success does not by itself establish scientific suitability.
+
+When an imported LAMMPS data file already contains complete and compatible topology and coefficients, Scymol can reuse it directly instead of regenerating the system.
+
+<p align="center">
+  <img src="markdown_resources/structure-viewer.gif" alt="Inspecting a packed and parameterized molecular structure">
+</p>
+
+### 3. Design the simulation protocol
+
+The Protocol editor represents the simulation as a directed acyclic graph. Available node families include:
+
+- Initialization
+- Energy minimization
+- Velocity creation
+- NVT dynamics
+- NPT dynamics
+- NVE dynamics
+- Deformation
+
+Each node has typed parameters, immediate validation, and a preview of the LAMMPS commands it contributes. Branches are explicit: every root-to-leaf path is compiled into its own `protocol_*.in` file, making alternatives easier to inspect, reproduce, and extend into higher-throughput studies.
+
+<p align="center">
+  <img src="markdown_resources/protocol-editor.gif" alt="Building and inspecting a LAMMPS protocol graph">
+</p>
+
+### 4. Prepare and run LAMMPS
+
+The Run stage copies the selected structure into the simulation directory, generates the protocol scripts and manifest, and launches the chosen script with a configurable command. The default is:
+
+```text
+lmp -in "{script}"
+```
+
+The command accepts `{script}`, `{script_path}`, and `{output_dir}` placeholders, so local, MPI, and cluster-launch commands can be adapted to the environment. Standard output and errors are displayed live. Runs can be cancelled, inspected, and retried.
+
+<p align="center">
+  <img src="markdown_resources/run-workspace.gif" alt="Following a prepared LAMMPS simulation and its live output">
+</p>
+
+### 5. Explore the results
+
+The Results stage discovers artifacts within the project and selects an appropriate viewer:
+
+- LAMMPS structures and dump trajectories open in the integrated 3D viewer.
+- `log.lammps` thermodynamic output and other numeric files open as tables and plots.
+- Text files and generated scripts open in a text viewer.
+- Numeric columns can be summarized with descriptive statistics and plotted as line or scatter series.
+
+<p align="center">
+  <img src="markdown_resources/results-browser.gif" alt="Exploring LAMMPS output and trajectories in Scymol">
+</p>
+
+The 3D viewer supports orthogonal and triclinic cells, trajectory playback, camera controls, periodic-boundary reconstruction, and large molecular scenes rendered with ModernGL.
 
 ## Installation
 
-### 1. Using Conda (Linux, x64)
+### Requirements
 
-> Scymol can be installed using
-`conda install -c eli.ams -c conda-forge scymol` (https://anaconda.org/eli.ams/scymol). This approach is currently only
-> compatible with
-> Unix-based operating systems. Windows support will arrive soon.
+- Python 3.10 or newer.
+- An OpenGL-capable system for the integrated 3D viewer.
+- [PySIMM](https://pysimm.org/) for generating and parameterizing new structures.
+- [LAMMPS](https://docs.lammps.org/Install.html) to execute simulations.
 
-Alternatively, you can install Scymol through the use
-of [env.yml script](https://github.com/eli-ams/scymol/blob/master/env.yml). Place the YAML file in the root directory
-`/`. The default environment name is `scymol`; however, you can modify it in the YAML file.
-Then, open a command line and run: `conda env create -f env.yml`.
-This will create a Conda environment named scymol with all the necessary dependencies. Once the installation is
-complete, activate the environment:
-`conda activate scymol`. Finally, invoke `scymol` to launch the program.
+LAMMPS and PySIMM are not required merely to edit protocols or inspect compatible existing results. Install Scymol normally using Conda or pip, then use a compatible LAMMPS installation available on your system. Conda supplies LAMMPS and MPI where compatible packages are available; pip installs the Python application and its Python dependencies, but not Windows system executables. Some GAFF-family systems require a LAMMPS build with the `EXTRA-MOLECULE` package, including support for `dihedral_style fourier`; see [`lammps.txt`](lammps.txt).
 
-### 2. Automatic Installation Scripts (Ubuntu/Windows, x64)
+### Install with Conda (recommended)
 
-Scymol can also be installed using automated setup scripts, which configure local virtual environments with all
-the necessary dependencies for Scymol to run.
-> This method requires internet connection and a globally accessible version of Python 3.9 or higher.
+Create an isolated environment and install Scymol from the `eli.ams` channel, with dependencies supplied by `conda-forge`:
 
-#### 2.1 Conda Environment
+```bash
+conda create -n scymol -c eli.ams -c conda-forge scymol
+conda activate scymol
+scymol
+```
 
-1. Download
-   Scymol's [conda_install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/conda_install.py).
-2. Place it on a local directory, namely `/`.
-3. Using a Conda command line / terminal, run `python conda_install.py --mpi-lammps` to initiate the set-up
-   process. This script will set up a local Conda Environment in `/`, downloading and setting
-   up everything that is needed to run Scymol. There are three flags:
-    - `--mpi-lammps`: (optional): Directs the script to download and set up precompiled OpenMPI and LAMMPS libraries.
-      These libraries are placed in the environment's PATH directory.
-    - `no-scymol`: (optional): Skips installing Scymol files from its GitHub repository. This option is useful if you
-      only need the environment, such as when cloning a repository to work in an IDE like PyCharm.
-4. Activate the Scymol Conda environment and run Scymol by invoking `scymol`. Note that this environment is local, so
-   you must specify its path when activating it, such as `conda activate /path/to/local/dir/scymol`.
+### Install with pip
 
-> Note: When installing on Virtual Machines, Servers, or other environments with limited graphical interfaces, ensure
-> that `libxcb-xinerama0` is installed.
+Install Scymol from PyPI into an activated Python 3.10 or newer virtual environment:
 
-#### 2.2 Virtual Environment
+```bash
+python -m pip install --upgrade pip
+python -m pip install scymol
+scymol
+```
 
-> Successfully tested on Windows 10 and 11 (x64). Currently in Beta for Linux distributions, with successful testing
-> only on Ubuntu x64.
+After installation, Scymol can discover compatible executables already available on the system. The selected LAMMPS and MPI configuration can be inspected, tested, and changed from the application.
 
-1. Download
-   Scymol's [venv_install.py script](https://github.com/eli-ams/scymol/blob/master/distributables/venv_install.py).
-2. Place it on a local directory, namely `/`.
-3. Using a command line / terminal, run `python venv_install.py --mpi-lammps` to initiate the set-up process. Make
-   sure there is Internet connection. This script will set up
-   a `/scymol` directory, downloading Scymol's source files from GitHub along with a Python Virtual Environment and all
-   necessary dependencies. The script will also create a shortcut to run Scymol in `/`. There are two flags:
-    - `--mpi-lammps`: (optional): Directs the script to download and set up precompiled OpenMPI and LAMMPS libraries.
-      These libraries are placed in the environment's PATH directory.
-4. Run `run_scymol.bat` (Windows) or `run_scymol.sh` (Linux) to run Scymol. You can also activate Scymol's Virtual
-   Environment and invoke `scymol` to run Scymol.
+### Optional Windows LAMMPS/MPI bundle
 
-### 2.3 Manual setup
+This is only a convenience for 64-bit Windows users who do not already have LAMMPS and MPI and prefer not to install or compile them separately. The repository includes the optional [`lammps+mpi_win64.zip`](distributables/lammps+mpi_win64.zip) bundle reused from Scymol 1.0. Download it and extract the entire archive so that the executables and their accompanying DLL files remain together. Then open **Tools → LAMMPS execution setup** in Scymol, select the extracted `LAMMPS.exe` and `mpiexec.exe`, choose the number of MPI processes, and click **Test and save**. Scymol runs a short packaged smoke test before accepting the configuration.
 
-1. Create a Python environment (Using [Python 3.9](https://www.python.org/downloads/) or above).
-2. Clone Scymol's repository from its [GitHub repository](https://github.com/eli-ams/scymol). Use `setup.py` to install
-   the following libraries / dependencies:
-    - [PyQt5](https://pypi.org/project/PyQt5/)
-    - [numpy](https://pypi.org/project/numpy/)
-    - [scipy](https://pypi.org/project/scipy/)
-    - [matplotlib](https://pypi.org/project/matplotlib/)
-    - [pysimm](https://pysimm.org/)
-    - [psutil](https://pypi.org/project/psutil/)
-    - [sobol_seq](https://pypi.org/project/sobol-seq/)
-    - [numba](https://pypi.org/project/numba/)
-    - [rdkit](https://pypi.org/project/rdkit/)
-    - [file_read_backwards](https://pypi.org/project/file-read-backwards/)
+The bundle is provided for convenience; an existing compatible LAMMPS/MPI installation can always be used instead.
 
-   > The `setup.py` file defines the entry point for Scymol using the keyword `scymol`, with the entry point set as
-   `scymol = scymol.main:main`.
+### Install from source
 
-3. Ensure that LAMMPS and MPI are available to Scymol upon calling commands like `mpiexec -n 12 lammps -in stage_1.in`
-   environment.
-4. Run `/scymol/main.py` or simply invoke `scymol` while the virtual environment is active.
+For development, clone the repository and create an isolated environment from the repository directory:
 
-## MPI & LAMMPS
+```bash
+conda create -n scymol python=3.12
+conda activate scymol
+```
 
-Scymol relies on [LAMMPS'](https://www.lammps.org/download.html) to run simulations and is best executed with a
-parallelization library, such as [OpenMPI](https://www.open-mpi.org/). The
-automatic installation files provided include a precompiled version of both LAMMPS and OpenMPI for exclusive
-use with the software. However, users may opt to use their own global versions of LAMMPS and/or MPI. In such cases, it
-is essential to adjust the execution commands in Tab 4 ("Run") within Scymol, ensuring that the absolute paths to the
-LAMMPS and/or MPI binaries are correctly specified. The final execution command in `Command to run` should match the
-format required to run a simulation on the user's system (e.g., `mpiexec -n 4 lmp input.dat`).
+Install PySIMM and Scymol in editable mode:
 
-## Sample Simulation
+```bash
+python -m pip install pysimm
+python -m pip install -e .
+```
 
-A simple simulation that utilizes all of Scymol's functionalities can be executed to ensure the program operates
-correctly. Scymol comes preconfigured with the necessary input parameters to perform such a simulation, which involves
-the initialization of a naphthalene molecule from a low-density state to its final, condensed form. The steps to run
-this simulation are as follows:
+Launch the application with either command:
 
-- **Molecule Selection**: Click on `Add` under the `1. Molecule Selection` section, and
-  select `Load from SMILES string`.
-- The SMILES notation for naphthalene, `c1c2ccccc2ccc1`, is preloaded by Default. Assign a name to the molecule and
-  press `Ok`.
-- **Mixture Setup**: In the `2. Mixture Setup` section, adjust the number of naphthalene molecules from `50` to `100`.
-- **Optional LAMMPS Setup**: In the `3. LAMMPS Setup` section, you may optionally check the `3.2 Stages` box and
-  double-click on the `LAMMPS Stage 1` box. This allows you to view the different LAMMPS routines that will be executed.
-  You can open and review the configuration parameters for each routine, although they can remain at their Default
-  values.
-- **Run the Simulation**: Under `4. Run`, ensure that the paths to the LAMMPS binary (e.g., LAMMPS.exe) and
-  parallelization library binary (e.g., MPIEXEC.exe) are correctly set. The active working directory when executing a
-  Job is set by Default to `/output/{job_id}/mixture_{mixture_nbr}/`, targeting the folder `/lammps+mpi` in the root of
-  Scymol's directory. Absolute paths can also be used if preferred.
-- Verify that the `Command to run` in `Tab 4` matches the command typically used for running LAMMPS/MPI simulations on
-  your system. Then, click `Run`.
-- A dialog will appear showing the simulation's progress. Once the simulation is complete, close the dialog. In
-  the `5. Postprocessing` section, navigate to the folder corresponding to the latest simulation. Within the `mixture_1`
-  folder, select any of the `.out` files (e.g., `1.5_uniaxialcompression_instantaneous.out`). Highlight a property of
-  interest (e.g., `v_sysdensity`) and right-click to compute the column `Statistics`. You can also highlight two
-  properties (e.g., `TimeStep` and `v_sysdensity`) and generate a XY-scatter plot between them.
-- To review the input scripts and output files, explore the directory `/output/{job_id}/mixture_{mixture_nbr}/`.
+```bash
+scymol
+```
 
-## Software Functionalities
+```bash
+python run_gui.py
+```
 
-Scymol has a user interface that guides users through the necessary steps for simulation setup, ensuring complete
-utilization of the software's features. While the interface is important for gathering and organizing user inputs, the
-computational capabilities are primarily contained within the backend architecture. These core functionalities, along
-with their respective user interface elements, are presented as follows.
+If LAMMPS is already installed, confirm that `lmp` is available on `PATH`, or replace the Run-tab command with the appropriate executable. For example:
 
-### Tab 1 - Molecule Selection
+```text
+mpiexec -n 8 lmp -in "{script}"
+```
 
-This tab enables users to create a molecular set for use in their simulation. Molecules can be added either through
-their [SMILES](https://en.wikipedia.org/wiki/Simplified_Molecular_Input_Line_Entry_System) notation or from a list of
-predefined molecule structure files such as [.mol](https://en.wikipedia.org/wiki/Chemical_table_file#Molfile)
-and [.pdb](https://en.wikipedia.org/wiki/Protein_Data_Bank). As molecules are loaded, they are added to
-a `1.1 List of Molecules` section, their key chemical information is displayed in a `1.2 Description` section, and an
-interactive 2D representation appears in a `1.3 Drawing` section. The order of the molecules in the list, which users
-can adjust via drag-and-drop, is reflected in the generated LAMMPS input files.
-![[resources/picture3.png]](resources/picture3.png)
+## Quick start
 
-### Tab 2 - Mixture Setup
+1. Launch Scymol and choose **Create a molecular system**.
+2. Draw or enter one or more molecules, choose their copy counts, and validate the system.
+3. Select the target density, packing settings, force field, and charge method, then build the structure.
+4. Review `structure.data` in the integrated 3D viewer.
+5. Create or modify the protocol graph and validate it.
+6. Select **Prepare simulation** to generate the LAMMPS scripts.
+7. Confirm the execution command and run the desired protocol path.
+8. Open the Results tab to inspect trajectories, logs, tables, and plots.
 
-This tab provides tools for configuring a molecular mixture. A `2.1 Setup` table lists the molecules loaded in Tab 1 and
-allows users to specify the number of each molecule and their initial orientation. The `2.2 Settings` section offers
-parameters crucial for the initial placement of molecules in the simulation box without overlap. An `2.3 Information`
-section provides an overview of the mixture, including the total number of molecules, average molecular mass, and
-molecular formula. A brief description of the UI elements' functionalities is presented next:
-`2.1 Setup`
-Name: Name of the molecule assigned when loading it.
-Number: Number of molecules to be added to the mixture.
-Rotate: Randomly rotate the molecule about its geometric center.
-`2.2 Settings`
-`2.1.1 Number of Mixtures needed` Number of duplicate simulations to perform.
-`2.1.2 Initial Density factor` Initial (often lower) density of the box to place the molecules. Lower means more space,
-which reduces the possibility of interparticle overlaps.
-`2.1.3 Layer offset` Distance from the Z-axis walls to place the molecules away from.
-`2.1.4 Distribution method` Selection of the statistical method to evenly place particles around a simulation box.
-`2.1.5 Potential energy threshold` Potential energy limit beyond which systems are discarded. The potential energy is
-computed using a Lennard-Jones pseudopotential with parameters all set to 1. Potential energy values below 0 indicate
-that attractive forces dominate.
-`2.1.6 Final density estimate` A rough estimate of final density of the system. This density is used by the LAMMPS
-subroutines in case compression or expansion is involved.
+For a guided example, select the **50-benzene tutorial** on startup or choose **Help → Guided tutorial**.
 
-![[resources/picture4.png]](resources/picture4.png)
+## Project format
 
-### Tab 3 - LAMMPS Setup
+Scymol writes all editable state and generated artifacts into the project directory selected by the user. It does not silently create a shared global workspace.
 
-This tab consists of two sections: `3.1 Force Field` and `3.2 Stages`. The Force Field section offers a selection of
-commonly used force fields, namely [GAFF](https://ambermd.org/antechamber/gaff.html)
-and [GAFF2](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7728379/), [PCFF](http://www.sklogwiki.org/SklogWiki/index.php/PCFF_force_field), [CHARMM](https://academiccharmm.org/),
-and [TIP3P](http://www.sklogwiki.org/SklogWiki/index.php/TIP3P_model_of_water). The program loads the atomic types and
-charges and checks if the selected force field is applicable to cover all the interactions in the system. The Stages
-list lets users design a sequenced list of LAMMPS stages. Each stage added is expandable, revealing a LAMMPS Flowchart
-menu, where users can set up a sequence of LAMMPS substages. A library is included to further aid users in setting up
-commonly used LAMMPS sequences (e.g., a heat cycle). Furthermore, each substage can be explored into, presenting
-configuration options for each substage (e.g., to set the temperature in an isothermal simulation).
-![[resources/picture5.png]](resources/picture5.png)
-![[resources/picture8.png]](resources/picture8.png)
+```text
+my-project/
+├── scymol.json
+└── output/
+    ├── system/
+    │   ├── system.pdb
+    │   ├── system_manifest.json
+    │   ├── molecule_pdbs/
+    │   └── imported/
+    ├── structure/
+    │   ├── structure.data
+    │   ├── structure_manifest.json
+    │   └── mol_files/
+    └── simulation/
+        ├── structure.data
+        ├── run_manifest.json
+        └── protocol_*.in
+```
 
-#### LAMMPS Routine windows
+The `scymol.json` file stores the editable project. Manifests record the settings and source artifacts used to produce generated files. Stable signatures allow Scymol to warn when a molecular definition or structure setting has changed and downstream artifacts need to be rebuilt.
 
-Scymol currently includes seven predefined stages: `Initialize`, `Minimize`, `Velocities`, `NPT`, NVT, `NVE`,
-and `UniaxialDeformation`. Future updates are expected to expand this list to incorporate more sophisticated routines,
-such as those for computing Cohesive Energy Density. The goal is to develop fully functional LAMMPS stages encapsulated
-as modular components that can process outputs from preceding stages, execute specific tasks, and generate inputs
-required for subsequent stages of the simulation. For example, the `UniaxialDeformation` module performs NVT
-compressions to the simulation box to bring the initialized, but low density system to its final, condensed state.
-![[resources/picture9.png]](resources/picture9.png)
+## Scientific scope
 
-### Tab 4 - Run
+Scymol helps construct, execute, and audit a molecular-simulation workflow. It does not determine whether a force field, charge model, ensemble, time step, simulation duration, or observable is appropriate for a particular scientific question.
 
-This tab allows users to specify the location of LAMMPS (`4.1 LAMMPS`) and the parallelization library (e.g.,
-MPI) (`4.2 Parallelization`). By Default, the program includes precompiled versions of LAMMPS and MPIEXEC, but users can
-choose their own versions. `4.3 Number of Processes` permits users to select the number of cores to be allocated for the
-job. When submitting a job, Scymol spawns a `Dialog` window which keeps track of the process' progress. The process can
-be forcefully terminated, and its `std out` and `std err` can be tracked in real time. Closing the `Dialog` forces
-the `Job` to be terminated just as if `Terminate` were to be pressed.
-![[resources/picture11.PNG]](resources/picture11.PNG)
+Always review the generated structure and LAMMPS scripts before production use. Validate the model and protocol against suitable experimental data, literature, or trusted reference calculations.
 
-### Tab 5 - Postprocessing
+Scymol is under active development. Imported-file compatibility depends on the information present in the source files, and optional scientific backends may impose their own platform and chemistry limitations.
 
-Although not a primary focus of the program, this tab enables users to view log files from previous jobs and to display
-computed properties, thereby offering a preliminary view of both computational and physical aspects of the simulations.
-Scymol remains active even when jobs are running, enabling users to track the progress of simulations in real time based
-on LAMMPS output. This ensures a more detailed update on the simulations' progress without the program freezing or
-becoming unresponsive.
-![[resources/picture10.PNG]](resources/picture10.PNG)
+## Development
 
-## Architecture
+The source tree separates the project model and scientific workflow from the Qt interface:
 
-Schematic of a standard job execution in the program, detailing directories, files, and class relationships. Bolded
-rectangles denote independent processes; blue rectangles specify the core directories in Scymol's root. Solid arrows
-indicate direct code interactions, and dashed arrows indicate signal-based communication.
-![[resources/picture1.png]](resources/picture1.png)
-The software architecture includes several directories and files organized functionally within the root directory `/`,
-detailed in the following table.
+```text
+repository/
+├── distributables/          # optional precompiled Windows LAMMPS/MPI bundle
+├── src/
+│   └── scymol/
+│       ├── gui/              # PySide6 interface, editors, plots, and 3D viewer
+│       ├── resources/        # packaged LAMMPS smoke-test inputs
+│       ├── analysis.py       # numeric and LAMMPS-output parsing
+│       ├── chemistry.py      # validation, conformers, packing, and parameterization
+│       ├── lammps.py         # LAMMPS command generation
+│       ├── models.py         # serializable project model
+│       ├── protocol.py       # graph validation and path generation
+│       ├── run_generation.py # run artifacts and manifests
+│       └── system_import.py  # LAMMPS data and trajectory import
+├── markdown_resources/       # screenshots and demonstration videos
+├── tests/
+├── pyproject.toml
+└── run_gui.py
+```
 
-| **Main Directories/Files**             | **Description**                                                                                                                                                                                                                     |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`/main.py`**                         | Initializes UI elements, instantiates `MainWindow` class, configures window properties, and maps interface signals to actions.                                                                                                      |
-| **`/frontend/`**                       | Custom module responsible for building the UI, containing various Python modules and subdirectories.                                                                                                                                |
-| `/frontend/main_window.py`             | Contains the Python class for constructing the UI of Scymol's `MainWindow` instance, including elements from all tabs and the menu bar.                                                                                             |
-| `/frontend/lammps_flowchart_window.py` | Contains Python modules for initializing instances of the `LammpsFlowchartWindow` class, crucial for setting up sequential LAMMPS simulation substages through a drag-and-drop interface. Subdirectory: `frontend/dialog_windows/`. |
-| `/frontend/molecule.py`                | Creates molecule instances when a user imports molecules, utilizing RDKit's utilities to ensure compatibility with LAMMPS.                                                                                                          |
-| `/frontend/static_functions.py`        | Standalone Python module with utility functions for common tasks like computing chemical information and file I/O operations.                                                                                                       |
-| `/frontend/dialog_windows/`            | Contains modules for initializing dialog windows directly triggered from the `MainWindow` instance.                                                                                                                                 |
-| `/frontend/custom_widgets/`            | Focuses on the creation and customization of widgets that introduce custom functionalities or override standard widget behavior.                                                                                                    |
-| `/frontend/context_menus/`             | Organizes Python files required for initializing instances of context menus, which may offer numerous options and submodules.                                                                                                       |
-| **`/front2back/`**                     | Links frontend's state with backend's input requirements for molecular systems, comprising various Python modules.                                                                                                                  |
-| `/front2back/BackendConnector.py`      | Translates UI interactions into an `inputs.py` file and manages the lifecycle of backend simulation processes.                                                                                                                      |
-| `/front2back/RunningProcessDialog.py`  | Creates a dialog window instance to display simulation output and allows for simulation termination.                                                                                                                                |
-| `/front2back/BackendThread.py`         | Spawns a subprocess to run newly submitted jobs, capturing stdout and stderr in a log file for real-time feedback.                                                                                                                  |
-| `/front2back/DataExtractor.py`         | Extracts data from UI widgets into a dictionary for generating the `inputs.py` file by `BackendConnector.py`.                                                                                                                       |
-| **`/backend/`**                        | Specialized module responsible for executing simulations, functioning independently and relying on the `inputs.py` file.                                                                                                            |
-| `/backend/lammps_commands.py`          | Houses the `LammpsCommands` class, offering methods for defining and appending LAMMPS commands to a simulation script.                                                                                                              |
-| `/backend/lammps_stages.py`            | Introduces the `LammpsStage` class, central to generating full LAMMPS scripts by calling commands from `LammpsCommands`.                                                                                                            |
-| `/backend/molecule.py`                 | Contains the `Molecule` class for creating instances based on SMILES strings, using Rdkit's functionalities for molecule initialization, minimization, and equilibration.                                                           |
-| `/backend/mixture.py`                  | Contains the `Mixture` class, providing methods for mixture-wide computations, including molecule sorting, force field assignment, and potential energy calculations.                                                               |
-| `/backend/pysimm_system.py`            | Interfaces with the PySIMM library to translate RdKit objects into LAMMPS-compatible inputs.                                                                                                                                        |
-| `/backend/inputs.py`                   | Fundamental file containing comprehensive input parameters and configurations for backend operations.                                                                                                                               |
-| `/backend/log_functions.py`            | Responsible for logging job executions, creating log files with varying detail levels to aid in debugging and tracking progress.                                                                                                    |
-| `/backend/static_functions.py`         | Similar to frontend's module, offering functions for common tasks, ensuring backend's independence.                                                                                                                                 |
-| `/backend/main.py`                     | Pivotal for running a complete job, operating independently of frontend and front2back modules, relying solely on the `inputs.py` file.                                                                                             |
-| `/backend/lammps_presets_library.py`   | Contains predefined LAMMPS substages, offering options like Initialize, Minimize, Velocities, NPT, NVT, NVE, and Uniaxial Deformation for simulations.                                                                              |
-| **`/env/`**                            | Houses the `python/`, `mpi/`, and `lammps/` subdirectories containing precompiled versions of Python, MPI, and LAMMPS, enabling Scymol to run without external dependencies.                                                        |
+Run the test suite from the repository root:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Install the project in editable mode first, as shown above, so the `src`-layout package is importable during test discovery. Tests that require optional graphical or chemistry components may be skipped when those dependencies are unavailable.
+
+## Contributing
+
+Bug reports and focused feature proposals are welcome through the [GitHub issue tracker](https://github.com/eli-ams/scymol/issues). When reporting a problem, include the operating system, Python version, Scymol version, the steps needed to reproduce it, and any relevant terminal or LAMMPS output. Contributions should preserve the inspectable project format and generated LAMMPS inputs.
+
+## Citation
+
+If Scymol supports your research, please cite:
+
+> Assaf, E. I., Maalouf, E., Liu, X., Lin, P., & Erkens, S. (2025). Scymol: A python-based software package for initializing and running molecular dynamics simulations using LAMMPS. *SoftwareX, 29*, 102044. [https://doi.org/10.1016/j.softx.2025.102044](https://doi.org/10.1016/j.softx.2025.102044)
+
+```bibtex
+@article{Assaf2025Scymol,
+  author  = {Assaf, Eli I. and Maalouf, Elsa and Liu, Xueyan and Lin, Peng and Erkens, Sandra},
+  title   = {Scymol: A python-based software package for initializing and running molecular dynamics simulations using LAMMPS},
+  journal = {SoftwareX},
+  volume  = {29},
+  pages   = {102044},
+  year    = {2025},
+  doi     = {10.1016/j.softx.2025.102044}
+}
+```
 
 ## License
 
-Scymol is licensed under the GNU General Public License (GPL), which is a widely used free software license that
-guarantees end users the freedom to run, study, share, and modify the software. The GPL license aims to ensure that the
-software remains free and open-source for all its users. For detailed terms and conditions, please refer to the full
-license text. The full text of the GPL license can be found at the official GNU website or included directly within this
-documentation. For the full GPL license text, you may visit
-the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html) website.
+Scymol is distributed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html). See the repository's `LICENSE` file for the full terms.
 
-## Credits
+## Acknowledgements
 
-Scymol was created by Eli I. Assaf (e.i.assaf@tudelft.nl), Elsa Maalouf (em40@aub.edu.lb), Xueyan Liu (
-x.liu@tudelft.nl), and Sandra Erkens (s.m.j.g.erkens@tudelft.nl). To cite, please refer to the manuscript `Scymol: A python-based software package for initializing and running molecular dynamics simulations using LAMMPS` (DOI: [https://doi.org/10.1016/j.softx.2025.102044](https://doi.org/10.1016/j.softx.2025.102044)).
+Scymol was created by Eli I. Assaf, Elsa Maalouf, Xueyan Liu, Peng Lin, and Sandra Erkens. This release continues the original project's aim of making reproducible molecular-simulation workflows accessible without concealing their underlying LAMMPS inputs.
