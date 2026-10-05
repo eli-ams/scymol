@@ -8,9 +8,11 @@
 [![Version](https://img.shields.io/badge/version-2.0.0-00A6A6)](pyproject.toml)
 [![License: GPL v3](https://img.shields.io/badge/license-GPL--3.0-blue)](LICENSE)
 
-![Scymol playing a LAMMPS trajectory in the integrated 3D viewer](markdown_resources/results-browser.gif)
+<p align="center">
+  <img src="markdown_resources/results-browser.gif" alt="Scymol playing a LAMMPS trajectory in the integrated 3D viewer">
+</p>
 
-*Scymol keeps system construction, protocol design, execution, plotting, and trajectory inspection in one project. Click the workflow images below to open the corresponding short demonstration.*
+*Scymol keeps system construction, protocol design, execution, plotting, and trajectory inspection in one project. Animated workflow previews are shown below.*
 
 Scymol is a desktop workbench for preparing and running molecular simulations with [LAMMPS](https://www.lammps.org/). It keeps the molecular definition, generated structure, simulation protocol, execution history, and results together in a portable project directory.
 
@@ -43,7 +45,9 @@ Start from molecular identities or from existing simulation files.
 
 In **Build** mode, draw or enter each molecular species, assign a name and copy count, and validate the definition before generating expensive artifacts. The editor supports atoms, bonds, chains, rings, cleanup, undo/redo, and image export.
 
-![Defining a multi-species molecular system in Scymol](markdown_resources/system-editor.gif)
+<p align="center">
+  <img src="markdown_resources/system-editor.gif" alt="Defining a multi-species molecular system in Scymol">
+</p>
 
 In **Import** mode, provide a LAMMPS data file, a dump trajectory, or both:
 
@@ -59,7 +63,9 @@ Available force-field choices currently include GAFF2, GAFF, Dreiding, and PCFF.
 
 When an imported LAMMPS data file already contains complete and compatible topology and coefficients, Scymol can reuse it directly instead of regenerating the system.
 
-![Inspecting a packed and parameterized molecular structure](markdown_resources/structure-viewer.gif)
+<p align="center">
+  <img src="markdown_resources/structure-viewer.gif" alt="Inspecting a packed and parameterized molecular structure">
+</p>
 
 ### 3. Design the simulation protocol
 
@@ -75,7 +81,9 @@ The Protocol editor represents the simulation as a directed acyclic graph. Avail
 
 Each node has typed parameters, immediate validation, and a preview of the LAMMPS commands it contributes. Branches are explicit: every root-to-leaf path is compiled into its own `protocol_*.in` file, making alternatives easier to inspect, reproduce, and extend into higher-throughput studies.
 
-![Building and inspecting a LAMMPS protocol graph](markdown_resources/protocol-editor.gif)
+<p align="center">
+  <img src="markdown_resources/protocol-editor.gif" alt="Building and inspecting a LAMMPS protocol graph">
+</p>
 
 ### 4. Prepare and run LAMMPS
 
@@ -87,7 +95,9 @@ lmp -in "{script}"
 
 The command accepts `{script}`, `{script_path}`, and `{output_dir}` placeholders, so local, MPI, and cluster-launch commands can be adapted to the environment. Standard output and errors are displayed live. Runs can be cancelled, inspected, and retried.
 
-![Following a prepared LAMMPS simulation and its live output](markdown_resources/run-workspace.gif)
+<p align="center">
+  <img src="markdown_resources/run-workspace.gif" alt="Following a prepared LAMMPS simulation and its live output">
+</p>
 
 ### 5. Explore the results
 
@@ -98,9 +108,9 @@ The Results stage discovers artifacts within the project and selects an appropri
 - Text files and generated scripts open in a text viewer.
 - Numeric columns can be summarized with descriptive statistics and plotted as line or scatter series.
 
-![Exploring LAMMPS numeric output as a table and plot](markdown_resources/results-browser.gif)
-
-![Playing a LAMMPS trajectory in Scymol's integrated 3D viewer](markdown_resources/results-browser.gif)
+<p align="center">
+  <img src="markdown_resources/results-browser.gif" alt="Exploring LAMMPS output and trajectories in Scymol">
+</p>
 
 The 3D viewer supports orthogonal and triclinic cells, trajectory playback, camera controls, periodic-boundary reconstruction, and large molecular scenes rendered with ModernGL.
 
