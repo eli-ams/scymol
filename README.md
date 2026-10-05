@@ -123,7 +123,7 @@ The 3D viewer supports orthogonal and triclinic cells, trajectory playback, came
 - [PySIMM](https://pysimm.org/) for generating and parameterizing new structures.
 - [LAMMPS](https://docs.lammps.org/Install.html) to execute simulations.
 
-The published packages install Scymol's Python dependencies and provide compatible LAMMPS and MPI binaries. You can instead select your own LAMMPS executable or MPI launcher from the Run stage. LAMMPS and PySIMM are not required merely to edit protocols or inspect compatible existing results. Some GAFF-family systems require a LAMMPS build with the `EXTRA-MOLECULE` package, including support for `dihedral_style fourier`; see [`lammps.txt`](lammps.txt).
+LAMMPS and PySIMM are not required merely to edit protocols or inspect compatible existing results. Install Scymol normally using Conda or pip, then use a compatible LAMMPS installation available on your system. Conda supplies LAMMPS and MPI where compatible packages are available; pip installs the Python application and its Python dependencies, but not Windows system executables. Some GAFF-family systems require a LAMMPS build with the `EXTRA-MOLECULE` package, including support for `dihedral_style fourier`; see [`lammps.txt`](lammps.txt).
 
 ### Install with Conda (recommended)
 
@@ -145,7 +145,13 @@ python -m pip install scymol
 scymol
 ```
 
-After installation, Scymol can discover the packaged executables or use a compatible LAMMPS installation already available on the system. The selected LAMMPS and MPI configuration can be inspected, tested, and changed from the application.
+After installation, Scymol can discover compatible executables already available on the system. The selected LAMMPS and MPI configuration can be inspected, tested, and changed from the application.
+
+### Optional Windows LAMMPS/MPI bundle
+
+This is only a convenience for 64-bit Windows users who do not already have LAMMPS and MPI and prefer not to install or compile them separately. The repository includes the optional [`lammps+mpi_win64.zip`](distributables/lammps+mpi_win64.zip) bundle reused from Scymol 1.0. Download it and extract the entire archive so that the executables and their accompanying DLL files remain together. Then open **Tools → LAMMPS execution setup** in Scymol, select the extracted `LAMMPS.exe` and `mpiexec.exe`, choose the number of MPI processes, and click **Test and save**. Scymol runs a short packaged smoke test before accepting the configuration.
+
+The bundle is provided for convenience; an existing compatible LAMMPS/MPI installation can always be used instead.
 
 ### Install from source
 
@@ -231,6 +237,7 @@ The source tree separates the project model and scientific workflow from the Qt 
 
 ```text
 repository/
+├── distributables/          # optional precompiled Windows LAMMPS/MPI bundle
 ├── src/
 │   └── scymol/
 │       ├── gui/              # PySide6 interface, editors, plots, and 3D viewer
