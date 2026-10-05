@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scymol"
+version = "2.0.0"
+description = "Hybrid project workbench and graphical MD protocol builder"
+requires-python = ">=3.10"
+dependencies = ["PySide6>=6.6", "rdkit", "numpy>=1.24", "moderngl>=5.8", "matplotlib>=3.7", "pysimm"]
+
+[project.scripts]
+scymol = "scymol.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+scymol = ["resources/lammps_smoke/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
