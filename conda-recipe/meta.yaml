@@ -5,8 +5,6 @@ package:
   name: {{ name|lower }}
   version: {{ version }}
 
-# Build from the repository checkout. For a fully reproducible public release,
-# replace this with the tagged GitHub or PyPI source archive and its SHA-256.
 source:
   path: ..
 
@@ -28,11 +26,8 @@ requirements:
     - numpy >=1.24
     - moderngl >=5.8
     - matplotlib-base >=3.7
-    # PySIMM is expected to be available from the eli.ams channel.
     - pysimm
-    # These provide the simulation engine and MPI launcher used by Scymol.
-    # Current conda-forge LAMMPS builds support Linux and macOS, not Windows.
-    - lammps
+    - "lammps >=2024.08.29,<2025.07.22"
     - openmpi
 
 test:
@@ -44,6 +39,7 @@ test:
     - python -c "import scymol; assert scymol.__version__ == '{{ version }}'"
     - python -c "from importlib.metadata import version; assert version('scymol') == '{{ version }}'"
     - pip check
+    - lmp -help
 
 about:
   home: https://github.com/eli-ams/scymol

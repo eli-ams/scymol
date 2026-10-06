@@ -123,24 +123,37 @@ The 3D viewer supports orthogonal and triclinic cells, trajectory playback, came
 - [PySIMM](https://pysimm.org/) for generating and parameterizing new structures.
 - [LAMMPS](https://docs.lammps.org/Install.html) to execute simulations.
 
-LAMMPS and PySIMM are not required merely to edit protocols or inspect compatible existing results. Install Scymol normally using Conda or pip, then use a compatible LAMMPS installation available on your system. Conda supplies LAMMPS and MPI where compatible packages are available; pip installs the Python application and its Python dependencies, but not Windows system executables. Some GAFF-family systems require a LAMMPS build with the `EXTRA-MOLECULE` package, including support for `dihedral_style fourier`; see [`lammps.txt`](lammps.txt).
+LAMMPS and PySIMM are not required merely to edit protocols or inspect compatible existing results. The recommended Conda installation supplies Scymol, PySIMM, a tested LAMMPS release, and OpenMPI on supported Linux systems. A pip installation supplies the Python application and its Python dependencies, but not operating-system LAMMPS or MPI executables. Some GAFF-family systems require a LAMMPS build with the `EXTRA-MOLECULE` package, including support for `dihedral_style fourier`; see [`lammps.txt`](lammps.txt).
 
 ### Install with Conda (recommended)
 
-Create an isolated environment and install Scymol from the `eli.ams` channel, with dependencies supplied by `conda-forge`:
+Create an isolated environment and install Scymol 2.0.0 from the `eli.ams` channel, with the remaining dependencies supplied by `conda-forge`:
 
 ```bash
-conda create -n scymol -c eli.ams -c conda-forge scymol
+conda create -n scymol \
+  --override-channels \
+  -c eli.ams \
+  -c conda-forge \
+  scymol=2.0.0
 conda activate scymol
 scymol
 ```
 
+`--override-channels` prevents packages from unrelated configured channels from being mixed into the environment. This installation includes PySIMM 1.1 from the `eli.ams` channel and a compatible Conda LAMMPS/OpenMPI stack. The published package constrains LAMMPS to the tested range `>=2024.08.29,<2025.07.22`; newer LAMMPS releases can still be configured manually from **Tools → LAMMPS execution setup**.
+
+To verify the Conda-provided LAMMPS executable independently:
+
+```bash
+lmp -help
+```
+
 ### Install with pip
 
-Install Scymol from PyPI into an activated Python 3.10 or newer virtual environment:
+Install PySIMM 1.1 from its upstream GitHub release, then install Scymol from PyPI into an activated Python 3.10 or newer virtual environment:
 
 ```bash
 python -m pip install --upgrade pip
+python -m pip install "pysimm @ git+https://github.com/polysimtools/pysimm.git@1.1"
 python -m pip install scymol
 scymol
 ```
@@ -162,10 +175,10 @@ conda create -n scymol python=3.12
 conda activate scymol
 ```
 
-Install PySIMM and Scymol in editable mode:
+Install PySIMM 1.1 from its upstream GitHub release and Scymol in editable mode:
 
 ```bash
-python -m pip install pysimm
+python -m pip install "pysimm @ git+https://github.com/polysimtools/pysimm.git@1.1"
 python -m pip install -e .
 ```
 
