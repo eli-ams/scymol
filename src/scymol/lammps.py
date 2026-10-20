@@ -146,7 +146,8 @@ def emit_node(
         rate_constant = f"scy_strain_rate_const_{variable_suffix}"
         target_ratio = f"(l{transverse_axis}+2.0*({wall_skin}))/l{axis}"
         if strain == "trate":
-            rate_expression = f"log({target_ratio})/({timestep}*{steps})"
+            # LAMMPS ln() is natural logarithm; log() is base 10.
+            rate_expression = f"ln({target_ratio})/({timestep}*{steps})"
         else:
             rate_expression = f"({target_ratio}-1.0)/({timestep}*{steps})"
         builder.add(
